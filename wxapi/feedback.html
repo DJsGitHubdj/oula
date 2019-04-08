@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>问题反馈</title>
+		<style type="text/css">
+			input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+				font-size: 14px;
+			}
+			.top input{border: 0;margin: 0;}
+			textarea{border: 0;margin: 0;}
+			.top p {
+				font-size: 14px;
+				margin: 0;
+				padding: 10px 15px;
+			}
+			.top p:first-child{
+				margin-top: 2px;
+			}
+			.start{
+				padding: 15px;
+				margin-top: 20px;
+			}
+			.mui-inline{font-size: 14px;vertical-align: bottom;color: #8F8F94;}
+			.start .mui-icon{color: #b5b5b5;font-size: 22px;}
+			.icons.mui-inline{font-size: 14px;margin-left: 10px;}
+			.start .mui-icon-star-filled{
+				color: #FFB400;
+				font-size: 22px;
+			} 
+			.bottom{padding: 15px;margin-top: 20px;}
+			#submitBtn{padding: 10px;background: #4376E4;color: #FFFFFF;border: 0;}
+			#success-popover {
+				width: 80%;
+				padding: 8%;
+				position: absolute;
+				left:10%;
+				right: 10%;
+				top: 14%;
+				text-align: center;
+			}
+			.popover-title{padding-bottom:20px ; font-size: 20px;}
+			.popover-tip{font-size: 14px;color: #777;}
+			.popover-img{margin-bottom: 20px;}
+			.popover-img .iconfont{font-size: 30px;color:#2AC845;font-weight: 600;}
+			.popover-bottom{padding-top: 26px;}
+			#close{border: 0;background: transparent;color: #666;}
+		</style>
+		
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="top mui-input-row">
+				<p>问题和意见</p>
+				<textarea id='question' rows="6" class="mui-input-clear question" placeholder="请详细描述你的问题和意见..."></textarea>
+				<p>您的邮箱</p>
+				<div class="mui-input-row">
+					<input id='contact' type="text" class="mui-input-clear contact" placeholder="(选填,方便我们联系你 )" />
+				</div>
+			</div>
+			<div class="start">
+				<div class="mui-inline">应用评分</div>
+				<div class="icons mui-inline">
+					<i data-index="1" class="mui-icon mui-icon-star"></i>
+					<i data-index="2" class="mui-icon mui-icon-star"></i>
+					<i data-index="3" class="mui-icon mui-icon-star"></i>
+					<i data-index="4" class="mui-icon mui-icon-star"></i>
+					<i data-index="5" class="mui-icon mui-icon-star"></i>
+				</div>
+			</div>
+			<div class="bottom">
+				<button type="button" class="mui-btn-block" id="submitBtn">提交反馈</button>
+			</div>
+		</div>
+		<div class="mui-popover" id="success-popover">
+			<div class="popover-title">提交成功</div>
+			<div class="popover-img">
+				<span class="iconfont icon-zhengque"></span>
+			</div>
+			<div class="popover-tip">感谢你的反馈，我们将尽快处理并告知处理结果。</div>
+			<div class="popover-bottom">
+				<button type="button" id="close" class="mui-btn">关闭</button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.ready(function(){
+				
+				//应用评分
+				mui('.icons').on('tap','i',function(){
+						var index = parseInt(this.getAttribute("data-index"));
+						var parent = this.parentNode;
+						var children = parent.children;
+						if(this.classList.contains("mui-icon-star")){
+							for(var i=0;i<index;i++){
+								children[i].classList.remove('mui-icon-star');
+								children[i].classList.add('mui-icon-star-filled');
+							}
+						}else{
+							for (var i = index; i < 5; i++) {
+								children[i].classList.add('mui-icon-star')
+								children[i].classList.remove('mui-icon-star-filled')
+							}
+						}
+						starIndex = index;
+				});
+				var submitBtn=document.getElementById("submitBtn");
+				var question=document.getElementById("question");
+				var contact=document.getElementById("contact");
+				submitBtn.addEventListener("tap",function(){
+					if(question.value==""){
+						return mui.toast('反馈信息填写不能为空');
+					}
+					var data={
+						"Judgem": "",
+						"question": question.value,
+						"contact": contact.value,
+						"score":''+starIndex
+					}
+					console.log(data)
+					question.value="";
+					contact.value="";
+					//清除所有星标
+					mui('.icons i').each(function (index,element) {
+						if (element.classList.contains('mui-icon-star-filled')) {
+							element.classList.add('mui-icon-star')
+								element.classList.remove('mui-icon-star-filled')
+						}
+					})
+					return;
+					mui.ajax('url',{
+						data:{
+							"Judgem": "",
+							"question": question.value,
+							"contact": contact.value,
+							"score":''+starIndex
+						},
+						beforeSend: function (request) {
+								request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+						},
+						dataType:'text',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						success:function(data){
+							var jsonData = JSON.parse(data);
+							if (jsonData.result == "true"){
+								mui("#success-popover").popover("show");
+								mui.toast("感谢您的反馈，我们将尽快将处理结果发送到您预留的联系方式")
+								question.value="";
+								contact.value="";
+								//清除所有星标
+								mui('.icons i').each(function (index,element) {
+									if (element.classList.contains('mui-icon-star-filled')) {
+										element.classList.add('mui-icon-star')
+											element.classList.remove('mui-icon-star-filled')
+									}
+								})
+								loaction.href="my.html";
+							}else{
+								mui.toast("身份验证错误");
+								mui.openWindow({
+										url: '404.html',
+										id: '404'
+								})
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							mui.toast("网络连接错误");
+							mui.openWindow({
+									url: '404.html',
+									id: '404'
+							})
+						}
+					});
+				})
+				document.getElementById("close").addEventListener("tap",function(){
+					mui("#success-popover").popover("hide");
+				})
+			})
+			
+		</script>
+	</body>
+</html>

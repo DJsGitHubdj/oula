@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/public.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+    <title>个人信息</title>
+    <style type="text/css">
+        .header {
+            padding: 14px;
+            background: #fff;
+        }
+
+        .my-card {
+            padding: 16px;
+            border-radius: 4px;
+            background: url(img/card.png);
+            background-size: 100% 100%;
+        }
+
+        .vip-card {
+            background: url(img/card-black.png);
+            background-size: 100% 100%;
+        }
+
+        .my-top {
+            margin-bottom: 10px;
+        }
+
+        .card-name {
+            font-size: 18px;
+            color: #adccf6;
+        }
+
+        .detials .mui-icon {
+            font-size: 14px;
+        }
+
+        .my-grade {
+            width: 70px;
+        }
+
+            .my-grade img {
+                width: 100%;
+            }
+
+        .detials {
+            font-size: 12px;
+            color: #fcfcfd;
+        }
+
+        .my-bottom {
+            padding-top: 54px;
+            padding-bottom: 10px;
+        }
+
+            .my-bottom .mui-pull-left .mui-icon {
+                display: inline-block;
+                color: #bbd4f5;
+            }
+
+            .my-bottom .card-number {
+                font-size: 24px;
+                color: #fafbfd;
+            }
+
+        .title {
+            padding: 10px 16px;
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .my-info {
+            font-size: 14px;
+        }
+
+        .mui-table-view:before {
+            height: 0;
+        }
+        /* .mui-table-view:after {left: 15px;} */
+        .my-info .mui-table-view-cell {
+            padding: 12px 15px;
+        }
+
+        .my-info .tel .mui-icon {
+            color: #888888;
+            font-size: 18px;
+        }
+
+        .my-info .mui-pull-right {
+            color: #333333;
+        }
+
+        .my-info input {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            height: 21px;
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .content-bottom {
+            padding: 15px;
+            background: #FFFFFF;
+        }
+
+        #submit {
+            padding: 10px;
+            color: #FFFFFF;
+            background: #3375E8;
+            border: 0;
+        }
+        /* 弹出层 */
+        .mui-popover {
+            width: 80%;
+            position: absolute;
+            left: 10%;
+            right: 10%;
+            top: 24%;
+            border-radius: 6px;
+        }
+
+        .popover-header {
+            font-size: 18px;
+            color: #FFFFFF;
+            padding: 12px 14%;
+            text-align: center;
+            background: #4376e4;
+            border-top-right-radius: 6px;
+            border-top-left-radius: 6px;
+        }
+
+        .popover-content {
+            padding: 20px;
+        }
+
+        .popover-bottom {
+            padding: 20px;
+        }
+
+        #go {
+            width: 100%;
+			padding: 10px;
+            border: 0;
+            background: #4376E4;
+        }
+    </style>
+</head>
+<body>
+    <div class="mui-content">
+        <div class="header">
+            <div class="my-card">
+                <div class="my-top mui-clearfix">
+                    <div class="card-name mui-pull-left">我的会员卡</div>
+                    <div class="mui-pull-right">
+                        <a href="buy-vip.html" id="buy-vip" class="detials">详细介绍<span class="mui-icon mui-icon-arrowright"></span></a>
+                    </div>
+                </div>
+                <div class="my-grade"><img id="my-grade" src="img/vip01.png"></div>
+                <div class="my-bottom mui-clearfix">
+                    <div class="mui-pull-left"></div>
+                    <div class="card-number mui-pull-right" id="card-number">
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="title">真实资料(不可更改)</div>
+        <ul class="my-info mui-table-view">
+            <li class="mui-table-view-cell">
+                <div class="mui-clearfix">
+                    <div class="mui-pull-left">真实姓名</div>
+                    <div class="mui-pull-right">
+                        <input type="text" id="my-name" value="" placeholder="您的真实姓名" />
+                    </div>
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-clearfix">
+                    <div class="mui-pull-left">证件类型</div>
+                    <div class="mui-pull-right" id="card-style">身份证</div>
+                </div>
+            </li>
+            <li class=" mui-table-view-cell">
+                <div class="mui-clearfix">
+                    <div class="mui-pull-left">证件号码</div>
+                    <div class="mui-pull-right">
+                        <input type="tel" id="id-number" value="" maxlength="18" placeholder="您的身份证号码"/>
+                    </div>
+                </div>
+            </li>
+            <li class="tel mui-table-view-cell">
+                <div class="mui-clearfix">
+                    <div class="mui-pull-left">手机号码<span class="mui-icon mui-icon-info"></span></div>
+                    <div class="mui-pull-right">
+                        <input type="tel" id="my-tel" value="" maxlength="11" placeholder="您的手机号码">
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="content-bottom" id="content-bottom" style="display: block;">
+            <button type="button" class="mui-btn-block" id="submit">提交</button>
+        </div>
+    </div>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/public.js" version=1.6></script>
+    <script>
+        mui.init();
+        mui.ready(function(){
+            // configValidate();
+            //封装id选择器
+            function get(id){
+                return document.getElementById(id)
+            }
+			// getData();
+        function getData(){
+            mui.ajax('action/User.ashx',{
+                data:{
+                    "Judgem":"getUserExt",
+                    "openid":Uid,
+                    "time":Tim
+                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                },
+                dataType:'text',//服务器返回json格式数据
+                type:'post',//HTTP请求类型
+                success:function(data){
+                    var jsonData=JSON.parse(data);
+                    if(jsonData.result=="true"){
+                        var userData=jsonData.userInfo[0];
+                        if (userData.grade == "1") {
+                            get("my-grade").src = "img/vip01.png";
+                        }else {
+                            get("my-grade").src = "img/vip01.png";
+                            document.getElementsByClassName("my-card")[0].classList.add("vip-card");
+                        }
+                        if(userData.user_code!=""){
+                            get("card-number").innerText=userData.user_code;
+                        }
+                        if(userData.name!=""){
+                            console.log("ss");
+                            get("my-name").value=(userData.name).substring(0,1)+"*";
+                        }
+                        if(userData.identity!=""){
+                            get("id-number").value=(userData.identity).substring(0,1)+"***************"+(userData.identity).substring(17,18);
+                        }
+                        if(userData.link_phone!=""){
+                            get("my-tel").value=userData.link_phone;
+                        }
+                    }else{
+                        mui.toast("身份验证错误");
+                    }
+                },
+                error:function(xhr,type,errorThrown){
+                    mui.openWindow({
+                        url:'404.html',
+                        id:'404'
+                    })
+                }
+            })
+        }
+        get("submit").addEventListener("tap",function(){
+            var idNumber=get("id-number").value;
+            var name=get("my-name").value;
+            console.log(name,idNumber)
+            var regName = /^[\u4e00-\u9fa5]{2,4}$/;
+            var regId = /^\d{15}(\d{2}[A-Za-z0-9])?$/i;
+            if(!regName.test(name)){
+                mui.toast("请输入中文姓名")
+                return;
+            }
+            if(!regId.test(idNumber)){
+                mui.toast("请输入正确的身份证号码")
+                return;
+            }
+            mui.ajax('action/User.ashx',{
+                data:{
+                    Judgem:"addUserExt",
+                    Uid:Uid,
+                    Tim:Tim,
+                    name:name,
+                    idNumber:idNumber
+                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                },
+                dataType:'text',//服务器返回json格式数据
+                type:'post',//HTTP请求类型
+                success:function(data){
+                    var jsonData = JSON.parse(data);
+                    if(jsonData.result=='true'){
+                        mui.toast("个人资料更新成功")
+                    }else{
+                        mui.openWindow({
+                            url:'404.html',
+                            id:'404'
+                        })
+                    }
+                },
+                error:function(xhr,type,errorThrown){
+                    mui.openWindow({
+                        url:'404.html',
+                        id:'404'
+                    })
+                }
+            });
+        });
+	})
+
+
+
+    </script>
+</body>
+</html>

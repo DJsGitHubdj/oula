@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<title>充值</title>
+		<style type="text/css">
+			.mui-content::after {height: 6px;}
+			.account-money{
+				background: #FFFFFF;
+			}
+			.account-money p{padding: 0 16px;height: 40px; line-height: 40px;}
+			.account-money div{padding: 0 16px; height: 54px; line-height: 54px;font-size: 28px;color: #979797;border-top: 1px solid #E5E5E5;}
+			.check-list{margin-top: 5px;color: #888888; background: #FFFFFF;}
+			.check-title{height: 40px;line-height: 40px;padding: 0 16px;font-size: 12px;border-bottom: 1px solid #E5E5E5;}
+			.check-title .mui-icon{font-size: 16px;}
+			.check-group{padding:20px 14px; padding-bottom: 0;}
+			.check-item{
+				display: block;
+				position: relative;
+				width: 30%;
+				float: left;
+				border: 1px solid #E5E5E5;
+				border-radius: 6px;
+				margin: 1.6%;
+				text-align: center;
+				padding: 10px 0;
+			}
+			.img_tip{
+				width:32px;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.check-active{background: #3375E8;color: #FFFFFF;}
+			.item-price{font-size: 14px;}
+			.item-sale{padding-top: 2px;font-size: 12px;}
+			.check-tip{position: relative; font-size: 12px;padding: 10px 0 20px 20px;}
+			.check-tip:after {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 18px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.6);
+				transform: scaleY(.6);
+				background-color: #E5E5E5;
+			}
+			.bottom-bar{padding: 16px; background-color: #FFFFFF;}
+			.bottom-bar .mui-icon{color: #da6763;margin-right: 10px;font-size: 30px;margin-top: 4px;}
+			.bottom-bar .button{margin-top: 6px;}
+			.bottom-bar .tip{color: #9b9a9a;font-size: 12px;}
+			.instruction{
+				margin-top: 6px;
+				padding: 15px;
+				background: #FFFFFF;
+			}
+			.instruction-title{
+				position: relative;
+				padding-bottom: 15px;
+				text-align: center;
+				font-size: 14px;
+				color:#000;
+			}
+			.instruction-title:after{
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.6);
+				transform: scaleY(.6);
+				background-color: #E5E5E5;
+			}
+			.instruction-content{
+				margin-top: 15px;
+			}
+			.instruction-content p{
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="account-money">
+				<p>账户余额</p>
+				<div>¥<span id="account-money">0.00</span></div>
+			</div>
+			<div class="check-list">
+				<div class="check-title mui-clearfix">
+					<div class="mui-pull-left">选择充值金额</div>
+					<div class="mui-pull-right"><span class="mui-icon mui-icon-info"></span></div>
+				</div>
+				<div class="check-group mui-clearfix">
+					<a class="check-item" id="m_49">
+						<div class="item-price">49元</div>
+						<div class="item-sale">可抢1单</div>
+					</a>
+					<a class="check-item" id="m_98">
+						<div class="item-price">98元</div>
+						<div class="item-sale">可抢2单</div>
+					</a>
+					<a class="check-item" id="m_196">
+						<div class="item-price">196元</div>
+						<div class="item-sale">可抢4单</div>
+					</a>
+					<a class="check-item" id="m_392">
+						<div class="item-price">392元</div>
+						<div class="item-sale">可抢8单</div>
+					</a>
+					<a class="check-item" id="m_784">
+						<div class="item-price">784元</div>
+						<div class="item-sale">可抢16单</div>
+						<img class="img_tip" src="img/recharge-tip.png">
+					</a>
+					<a class="check-item" id="m_1568">
+						<div class="item-price">1568元</div>
+						<div class="item-sale">可抢32单</div>
+					</a>
+				</div>
+				<div class="check-tip">
+					(当前可用资金 <span id="money">0.00</span>元)
+				</div>
+			</div>
+			<div class="bottom-bar mui-clearfix">
+				<div class="mui-pull-left">
+					<span class="mui-icon mui-icon-info"></span>
+				</div>
+				<div class="mui-pull-left">
+					<div>充值后可享受抢单名额</div>
+					<div class="tip">请先阅读充值说明</div>
+				</div>
+				<div class="button mui-pull-right">
+					<button type="button" class="mui-btn-blue" id="goBuy">立即买入</button>
+				</div>
+			</div>
+			<div class="instruction">
+				<div class="instruction-title">充值说明</div>
+				<div class="instruction-content">
+					<p>1.充值金额仅限欧啦联盟使用.</p>
+					<p>2.充值成功后暂不支持账户余额退款、提现或转赠他人。</p>
+					<p>3.在充值过程如遇到任何问题，请关注欧啦联盟公众号，我们将为您提供解决方案，帮助您快速完成充值。</p>
+					<p>4.VIP会员不支持账户余额支付。</p>
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script>
+			var checked="";
+			var checkedId ="";
+			mui(".check-group").on("tap","a",function(){
+				try{ 
+				 document.getElementById(checkedId).className ="check-item";
+				}catch(err){}
+				this.classList.add("check-active");
+				this.checked=this.getAttribute("id");
+				checkedId = this.getAttribute("id");
+				console.log(checkedId)
+			})
+			document.getElementById("goBuy").addEventListener("tap",function(){
+				if(checkedId!=""){
+					mui.ajax('',{
+						data:{
+							
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							
+						},
+						error:function(xhr,type,errorThrown){
+							
+						}
+					});
+				}
+			})
+		</script>
+	</body>
+</html

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>分享有赏</title>
+		<style>
+			body,.mui-content{background-image:
+			 -webkit-linear-gradient(left, #5698f2 50%, #4669e1);
+			}
+			.mui-content::after{content: "";height: 40px;}
+			.header{
+				padding: 24px 0;
+				text-align: center;
+				color: #FFFFFF;
+			}
+			.title{
+				padding: 16px;
+				font-size: 22px;
+				line-height: 1;
+			}
+			.sub-title{
+				font-size: 28px;
+				line-height: 1;
+			}
+			.container{
+				position: relative;
+				margin:4px 16px ;
+				padding: 22px;
+				background: #FFFFFF;
+				border-radius: 6px;
+			}
+			.container img{
+				display: block; 
+				width: 100%;
+				margin-top: 30px;
+			}
+			.style-list{
+				height: 100px;
+				margin: 8px 0;
+				padding: 20px 0;
+				background: #f9fafe;
+				border: 1px solid #e8f1fd;
+			}
+			.recharge,.grab{width: 50%; float: left; text-align: center; font-size: ;}
+			.recharge{border-right: 1px solid #e7ecf8;}
+			#share{padding: 10px;margin: 0;}
+			#img-right{
+				display: block;
+				width: 74px;
+				position: absolute;
+				right: -4px;
+				top:-34px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="title">分享成功</div>
+				<div class="sub-title">朋友注册即得现金奖励</div>
+			</div>
+			<div class="container">
+				<img src="img/share-content.png" alt="share">
+				<div class="style-list mui-clearfix">
+					<div class="recharge">
+						<div>充值会员</div>
+					</div>
+					<div class="grab">
+						抢单
+					</div>
+				</div>
+				<button type="button" class="mui-btn-blue mui-btn-block" id="share">立即分享赚取赏金</button>
+				<img id="img-right" src="img/share-right.png" >
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init();
+			mui.ready(function(){
+			})	
+		</script>
+	</body>
+</html>

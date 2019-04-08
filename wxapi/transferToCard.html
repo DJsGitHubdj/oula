@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>申请提现</title>
+		<style type="text/css">
+			.header{
+				padding: 10px 12px;
+				padding-bottom: 6px;
+				display: flex;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				-webkit-align-items: center;
+				background: #FFFFFF;
+				border-bottom: 1px solid #E5E5E5;
+			}
+			.bank-img{width: 90px;margin-right: 15px;}
+			.bank-img img{max-width: 100%;}
+			#card-number{color: #8F8F94;}
+			.header .mui-icon{font-size: 18px;color: #8F8F94;}
+			.bank-content{flex-grow: 1;-webkit-flex-grow: 1;}
+			.bank-content div{font-size: 18px;padding-bottom: 4px;}
+			.bank-content p{font-size: 12px;}
+			.bank-content .count{margin:0 4px}
+			.container{padding: 15px;margin-top: 8px; background: #FFFFFF;}
+			.container .title{font-size: 16px;color: #8F8F94;}
+			.trans-input{padding: 26px 0;border-bottom: 1px solid #E5E5E5; }
+			#trans-money{display: inline-block;width: auto;border: 0;padding: 0;margin: 0;}
+			.trans-input label{display: inline-block;margin-right: 8px; font-size: 36px;vertical-align: middle;}
+			.enter-time{
+				padding: 0 15px;
+				padding-bottom: 14px; 
+				font-size: 14px;
+				background: #FFFFFF;
+				border-bottom: 1px solid #E5E5E5;
+			}
+			#enter-time{color: #DD524D;margin-left: 4px;}
+			.bottom{padding: 0 15px; margin-top: 20px;}
+			#transfer-to-card{padding: 10px; border: 0;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="bank-img">
+					<img id="bank-img" src="" >
+				</div>
+				<div class="bank-content">
+					<div><span id="bank-name"></span><span id="card-number"></span></div>
+					<p>该卡本次最多可提取<span class="count" id="take-money">10000</span>元</p>
+				</div>
+				<span class="mui-icon mui-icon-arrowright"></span>
+			</div>
+			<div class="container">
+				<div class="title">申请金额(元)</div>
+				<div class="trans-input">
+					<label>¥</label>
+					<input type="number" id="trans-money" placeholder="建议200以上,以便看到收益">
+				</div>
+			</div>
+			<div class="enter-time">
+				预计到账时间<span id="enter-time">3-7个工作日</span>
+			</div>
+			<div class="bottom">
+				<button id="transfer-to-card" class="mui-btn-block mui-btn-blue" data-loading-icon-position="right">确认申请</button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bank.js"></script>
+		<script>
+			mui.ready(function(){
+				function get(id){
+					return document.getElementById(id)
+				};
+				var cardNubmer = decodeURI(GetQueryString("card_number"));
+				var url="https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo="+cardNubmer+"&cardBinCheck=true";
+				var result="";
+				if(cardNubmer=="" || cardNubmer==null){
+					getData();
+				}else{
+					var url="https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo="+cardNubmer+"&cardBinCheck=true";
+					getCardType();
+				}
+				function getCardType(){
+					mui.ajax(url, {
+						data: {},
+						dataType: 'text',//服务器返回json格式数据
+						type: 'post',//HTTP请求类型
+						success: function (data) {
+							result = JSON.parse(data);
+							if(result.bank){
+								for(var i in bankList){
+									if(i==result.bank){
+										get("bank-name").innerText=bankList[i];
+										get("card-number").innerText="("+cardNubmer.substring(cardNubmer.length-4)+")";
+										get("bank-img").src="https://apimg.alipay.com/combo.png?d=cashier&t="+i;
+									}
+								}
+							}else{
+								get("bank-name").innerText="可能错误的卡号";
+								get("take-money").innerText="0";
+								get("bank-img").src="img/bank-card.png";
+								mui.toast("绑定的卡号可能有误，建议重新绑定！");
+								
+							}
+						},
+						error: function (xhr, type, errorThrown) {
+							mui.openWindow({
+								url: '404.html',
+								id: '404'
+							})
+						}
+					})
+				}
+				get("transfer-to-card").addEventListener("tap",function(){
+					location.href="completeTransfer.html";
+				})
+			})
+			function getData(){
+				mui.ajax("action/User.ashx", {
+					data: {
+						"Judgem": "getUserInfo",
+						"openid": Uid,
+						"time": Tim
+					},
+					beforeSend: function (request) {
+						request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+					},
+					dataType: 'text',//服务器返回json格式数据
+					type: 'post',//HTTP请求类型
+					success: function (data) {
+				
+						var jsonData = JSON.parse(data);
+						if (jsonData.result == "true") {
+							get("card-number").innerText="("+jsonData.cardNumber.substring(cardNubmer.length-4)+")";
+						}else{
+							
+							mui.toast("身份验证错误");
+						}
+					},
+					error: function (xhr, type, errorThrown) {
+						mui.openWindow({
+							url: '404.html',
+							id: '404'
+						})
+					}
+				})
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>进件统计</title>
+		<style type="text/css">
+			.header{
+				color: #FFFFFF;
+				text-align: center;
+				background: #FFFFFF;
+				padding-top: 30px;
+				padding-bottom: 36px;
+				background: url(img/3.png);
+				background-size: 100% 100%;
+			}
+			.title{font-size: 24px;margin-bottom: 10px;}
+			.sub-title{font-size: 14px;}
+			.none-tip{padding:20px;text-align: center;}
+			.none-img img{width: 76px;margin: auto;}
+			
+			#income-list{font-size: 14px;color: #666666;}
+			.table-row{
+				position: relative;
+				display: block;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background: #FFFFFF;
+				padding: 12px 6px;
+				color: #333;
+			}
+			.table-cell{
+				/* flex-grow: 1; */
+				width: 20%;
+				text-align: center;
+			}
+			#list-total .table-row:after{
+				font-family: Muiicons;
+				content: "\e583";
+				display: inline-block;
+				top: 50%;
+			}
+			#list-total .table-row.a-active:after{
+				font-family: Muiicons;
+				content: "\e581";
+				display: inline-block;
+				top: 50%;
+			}
+			.mui-collapse-content .table-row{
+				padding: 8px 0;
+				border-bottom: 1px solid #E5E5E5;
+			}
+			#income-list .iconfont{font-size: 18px;color: #FFFF00; vertical-align: middle;margin-right: 4px;} 
+			.a-active{
+				background-color:#8F8F94 ;
+			}
+			.table-row.sub-row{
+				background: #DEC585;
+				color: #FFFFFF;
+			}
+			.new-table{
+				background: #eee;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="title">进件统计</div>
+				<div class="sub-title">我的统计列表</div>
+			</div>
+			<div class="none-tip" id="none-tip" style="display: none;">
+				<div class="none-img"><img src="img/none.png" alt=""></div>
+				<p>当前暂无进件</p>
+			</div>
+			<div id="income-list">
+				<div class="table-row" style="background: #e9eef3;">
+					<div class="table-cell">业务员</div>
+					<div class="table-cell">待审核</div>
+					<div class="table-cell">通过</div>
+					<div class="table-cell">未通过</div>
+					<div class="table-cell">进件总数</div>
+				</div>
+				<div id="list-total">
+					<a class="table-row" data-id="001">
+						<div class="table-cell">邓颉</div>
+						<div class="table-cell">23</div>
+						<div class="table-cell">24</div>
+						<div class="table-cell">5</div>
+						<div class="table-cell">52</div>
+					</a>
+					<a class="table-row" data-id="002">
+						<div class="table-cell">春兰</div>
+						<div class="table-cell">23</div>
+						<div class="table-cell">24</div>
+						<div class="table-cell">4</div>
+						<div class="table-cell">51</div>
+					</a>
+					<a class="table-row" data-id="003">
+						<div class="table-cell">小邱</div>
+						<div class="table-cell">23</div>
+						<div class="table-cell">24</div>
+						<div class="table-cell">4</div>
+						<div class="table-cell">50</div>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script>
+			
+			function get(id){
+				return document.getElementById(id);
+			}
+			
+			function getData(){
+				mui.ajax('action/User.ashx',{
+					data:{
+						Judgem:"userInfo",
+						Uid:Uid,
+						Tim:Tim,
+						pageIndex: pageIndex
+					},
+					beforeSend: function (request) {
+						request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+					},	
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:30000,//超时时间设置为10秒；              
+					success:function(data){
+						if(data.result=="true"){
+							if(data.length<0){
+								get("none-tip").style.display="block";
+							}else{}
+								
+						}else{
+							mui.toast("身份验证错误")
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						mui.openWindow({
+							url:'404.html',
+							id:'404'
+						})
+					}
+				})
+			}
+			mui.ready(function(){
+				var data=[
+					{
+					"customerId":"02",
+					"name":"a老师",
+					"dsh":"50",
+					"tg":"15",
+					"wtg":"40",
+					"total":"65"
+					},
+					{
+					"customerId":"03",
+					"name":"b老师",
+					"dsh":"30",
+					"tg":"15",
+					"wtg":"40",
+					"total":"45"
+					},
+					{
+					"customerId":"04",
+					"name":"c老师",
+					"dsh":"20",
+					"tg":"15",
+					"wtg":"40",
+					"total":"35"
+					}
+				]
+				var customerId="";
+				var newChild="1";
+				var rows= document.getElementsByClassName("table-row");
+				mui("#list-total").on("tap","a",function(){
+					console.log(this)
+					this.disabled="true";
+					console.log(this.nextElementSibling)
+					var that=this;
+					for(var k in rows){
+						rows[k].className="table-row"
+					}
+					that.classList.add("a-active");
+					var customerId= this.getAttribute("data-id");
+					console.log(customerId)
+					// ajax...
+					if(data.length>0){
+						for(var i in data){
+							var item=document.createElement("a");
+							item.className="table-row new-table";
+							item.setAttribute("data-id",data[i].customerId)
+							var item_str="";
+							item_str+="<div class='table-cell'>"+data[i].name+"</div>";
+							item_str+="<div class='table-cell'>"+data[i].dsh+"</div>";
+							item_str+="<div class='table-cell'>"+data[i].tg+"</div>";
+							item_str+="<div class='table-cell'>"+data[i].wtg+"</div>";
+							item_str+="<div class='table-cell'>"+data[i].total+"</div>";
+							item.innerHTML=item_str;
+							get("list-total").insertBefore(item,that.nextElementSibling);
+						}
+					}else{
+						mui.toast("没有下属推广客户经理了")
+					}
+				
+				})
+				
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>邀请好友</title>
+		<style>
+			body,.mui-content{background: #FFFFFF;}
+			.header{
+				padding: 24px 0;
+				text-align:center;
+				color: #4376e4;
+				background: #FFFFFF;
+			}
+			.title{
+				font-size:24px;
+				font-weight: 600;
+				margin-bottom: 8px;
+			}
+			.sub-title{font-size: 16px;}
+			.sub-title span{margin:0 4px;color: #dec585;}
+			.container{padding: 15px;
+				padding-top: 40px;
+			}
+			.container img{display: block;width: 100%;}
+			.nav{
+				margin-top: 50px;
+				padding:15px ;
+				display: flex;
+				justify-content: space-around;
+				-webkit-justify-content: space-around;
+				align-items: center;
+				-webkit-align-items: center;
+			}
+			.nav-item{text-align: center;}
+			.nav-item .iconfont{
+				display: block; 
+				font-size: 24px;
+				font-weight: 600;
+				color:#4376e4 ;
+				margin-bottom: 6px;
+			}
+			.nav-item .item-title{font-size: 14px;}
+			.bottom{padding: 15px;text-align: center;}
+			#go-invite{padding: 10px;}
+			.bottom-tip{font-size: 12px;color: #a4a4a4;}
+			/*弹框*/
+			.mui-backdrop {
+				background-color: rgba(0,0,0,0.5);
+			}
+			#top-popover{
+				width: 100%;
+				padding:20px 40px;
+				top:0;
+				right: 0;
+				background:rgba(0,0,0,0.2);
+				border-radius: 0;
+				text-align: center;
+			}
+			#top-popover p{
+				font-size: 14px;
+				color: #F5F5F5;
+			}
+			#top-popover .iconfont{
+				font-size: 40px;
+				color: #F5F5F5;
+				position: absolute;
+				top:12px;
+				right: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="title">邀请好友&nbsp;注册成功</div>
+				<div class="sub-title">享受<span>10</span>元收益</div>
+			</div>
+			<div class="container">
+				<img src="img/invite2.png" >
+			</div>
+			<div class="nav">
+				<div class="nav-item">
+					<span class="iconfont icon-yiwancheng4"></span>
+					<div class="item-title">常邀请</div>
+				</div>
+				<div class="nav-item">
+					<span class="iconfont icon-libao"></span>
+					<div class="item-title">得好礼</div>
+				</div>
+				<div class="nav-item">
+					<span class="iconfont icon-huiyuan"></span>
+					<div class="item-title">享收益</div>
+				</div>
+			</div>
+			<!-- <div class="bottom">
+				<button id="go-invite" class="mui-btn-block mui-btn-blue">一键邀请</button>
+			</div> -->
+			<!-- 指示层 -->
+			<div id="top-popover" class="mui-popover">
+				<p>点击发送给朋友</p>
+				<p>成功邀请得 10 元收益</p>
+				<span class="iconfont icon-fenxiang"></span>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.ready(function(){
+				mui('#top-popover').popover('toggle');
+			})
+		</script>
+	</body>
+</html>

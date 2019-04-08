@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>添加工资卡</title>
+		<style type="text/css">
+			.mui-content{background: #FFFFFF;}
+			.header{
+				text-align: center;
+				background: #FFFFFF;
+				padding-top: 30px;
+				padding-bottom: 36px;
+			}
+			.title{font-size: 24px;margin-bottom: 10px;}
+			.sub-title{font-size: 16px;color: #666666; }
+			.container{
+				padding: 4px 15px;
+				background: #FFFFFF;
+				border-bottom: 1px solid #E5E5E5;
+				border-top: 1px solid #E5E5E5;
+				position: relative;
+			}
+			.container label{display: inline-block; width: 24%;}
+			.container.mui-input-row input{width: 76%;border: 0;margin: 0;}
+			.submit{padding: 15px;margin-top: 20px;}
+			#submit{padding: 10px;background: #3375EB;}
+			.tip{padding:14px 25px ;color: #858687;font-size: 14px;}
+			.tip .mui-icon{font-size: 18px;margin-left: 4px; color: #007AFF;}
+			#my-name{margin: 0 4px; font-size: 16px; color:#333333;font-weight: 700;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="title">提现金额将发放到该卡中</div>
+				<div class="sub-title">请填写您的银行卡</div>
+			</div>
+			<div class="tip">请添加<span id="my-name">邓颉</span>的银行卡<span class="mui-icon mui-icon-info" title="只能绑定本人银行卡"></span></div>
+			<div class="container mui-input-row">
+				<label>卡号</label>
+				<input type="number" id="card-number" class="mui-input-clear" maxlength="19"  placeholder="该交易仅支持储蓄卡">
+			</div>
+			<div class="submit">
+				<button id="submit" class="mui-btn-block mui-btn-blue">下一步</button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script>
+			mui.ready(function(){
+				var submitBtn = document.getElementById("submit");
+				var cardNumber=document.getElementById("card-number");
+				submitBtn.disabled=true;
+				cardNumber.focus();
+				document.getElementById("card-number").addEventListener("input",function(){
+					console.log(this.value.length)
+					if(this.value.length<12){
+						submitBtn.disabled=true;
+					}else{
+						submitBtn.disabled=false;
+					}
+				})
+				submitBtn.addEventListener("tap",function(){
+					if(cardNumber.value==""){
+						this.disabled=true;
+					}else{
+						this.disabled=false;
+						location.href="transferToCard.html?card_number="+cardNumber;
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

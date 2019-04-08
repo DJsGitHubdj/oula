@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>产品详情</title>
+		<style>
+			#product-title::before{
+				content: "";
+				display: inline-block;
+				width: 6px;
+				height: 26px;
+				background: #3375e8;
+				margin-right: 8px;
+				vertical-align: middle;
+			}
+			#product-title{
+				padding-top:18px;
+				font-size: 20px;
+				font-weight: 500;
+				background: #FFFFFF;
+			}
+			.product-head{padding:0 14px ;background: #FFFFFF;}
+			.info-bar{padding:12px 0;background: #fff;}
+			.info-bar .mui-btn{font-size: 12px;padding: 0 4px;color: #666;}
+			.info-bar .iconfont{display: inline-block; font-size: 12px; vertical-align: middle;margin-top: -2px;margin-left: 10px;margin-right: 4px;}
+			#read-count{vertical-align: middle;font-size: 12px;color: #666;}
+			.news-tip{border-bottom: 1px solid #e5e5e5;padding-bottom: 10px;}
+			.news-tip p{margin: 0;}
+			.product-img{padding: 28px 24px; background: #FFFFFF;}
+			.product-img img{width: 100%;}
+			.product-content{padding:12px 14px;background: #FFFFFF;}
+			.product-advantage p,.product-content p{color: #000;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div id="product-title"></div>
+			<div class="product-head">
+				<div class="info-bar">
+				</div>
+				<div class="news-tip mui-clearfix">
+					<p id="reporter" class="mui-pull-left"></p>
+				</div>
+			</div>
+			<div class="product-img">
+				<p><img id="product-img" src="" alt=""></p>
+			</div>
+			<div class="product-content" id="product-content">
+			</div>
+		</div>	
+		<footer class="mui-bar mui-bar-tab">
+			<a href="product-list.html" class="mui-tab-item mui-active">
+				<span class="mui-icon iconfont icon-shouye1"></span>
+				<span class="mui-tab-label">今日</span>
+			</a>
+			<a class="mui-tab-item" href="grab-case.html">
+				<span class="mui-icon iconfont icon-qiang"></span>
+				<span class="mui-tab-label">抢单</span>
+			</a>
+			<a class="mui-tab-item" href="work-table.html">
+				<span class="mui-icon iconfont icon-gongzuotai" style="font-size: 26px;"></span>
+				<span class="mui-tab-label">工作台</span>
+			</a>
+			<a class="mui-tab-item" href="my.html">
+				<span class="mui-icon iconfont icon-wo"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</footer>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui.openWindow.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init();
+			mui.ready(function(){
+				// 页面接受参数
+				// 异步调用
+				var ajaxId=""
+				mui.getExtras(function(extras){
+					ajaxId=extras.productId;
+				});
+				// 封装id选择器
+				var get = function (id) {
+					return document.getElementById(id);
+				};
+				// getAjax();
+				//ajax	提取该页渲染数据...
+				function getAjax(){
+					mui.ajax('action/Product.ashx',{
+						data:{
+						    Judgem: "productDetail",
+							Uid:Uid,
+							Tim:Tim,
+							id:ajaxId
+						},
+						beforeSend: function (request) {
+							request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+						},	
+						dataType:'text',//服务器返回json格式数据
+						type: 'post',//HTTP请求类
+						success: function (data) {
+						    var jsonData = JSON.parse(data);
+							var info_bar=document.getElementsByClassName("info-bar")[0];
+							if (jsonData.result == "true") {
+							    var product = jsonData.productDetail[0];
+							    get("product-title").innerText = product.product_name;
+							    info_bar.innerHTML =""; 
+                                var keywordStr = "<button class='mui-btn'>" + product.keyword + "</button>";
+							    var readNumStr="";
+							    if (product.readnum == "") {
+							        readNumStr = "<span class='iconfont icon-faxian'></span><span id='read-count'>0</span>";
+							    } else {
+							        readNumStr = "<span class='iconfont icon-faxian'></span><span id='read-count'>" + product.readnum + "</span>";
+							    }
+							    info_bar.innerHTML = keywordStr + readNumStr;
+							    get("reporter").innerText = product.create_time;
+							    var imgSrc = "";
+							    if (product.productImg != "") {
+							        var imgSrc = "https://wx.olakeji.cn/ProductImages/" + product.productImg;
+							    }
+								get("product-img").src=imgSrc;
+							    get("product-content").innerHTML = product.description;
+								
+							}else{
+								mui.toast("身份验证错误")
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							mui.openWindow({
+								url:'404.html',
+								id:'404'
+							})
+						}
+					})
+				}
+				
+			})
+		</script>
+	</body>
+</html>

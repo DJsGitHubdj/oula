@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>抢单</title>
+		<style type="text/css">
+			.case-item{
+			padding:12px 15px;
+			background: #fff;
+			border-top: 1px solid #d5d5d5;
+			}
+			.case-item:first-child{
+				/* margin-top: 10px; */
+			}
+			.case-item div{
+				padding:4px 0;
+			}
+			.case-item button{padding:2px 20px;border-radius: 0;background: #5576ab;}
+			.end-time{font-size: 24px;color: #EC971F;}
+			.side-bar{position: fixed;right:20px;bottom:60px;}
+			.side-bar span{
+				font-size: 30px;
+				color:#5576AB ;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <header class="mui-bar mui-bar-nav mui-clearfix">
+			<h1 id="title" class="mui-title">抢单</h1>
+			<div class="nav-tools mui-pull-right">
+				<a href=""><span class="mui-icon iconfont icon-xinxi"><span class="mui-badge">2</span></span></a>
+			</div>
+		</header> -->
+		<div class="mui-content">
+			<div class="case-item">
+				<div class="mui-clearfix">
+					<div class="case-name mui-pull-left">张先生</div>
+					<div class="mui-pull-right"><button type="button" class="mui-btn-blue">抢单</button></div>
+				</div>
+				<div>意向金额：<span class="need-money">1000</span>元</div>
+				<div class="case-condition">客户有房有车,资质优秀，公务员，征信良好，以前没有做过小贷，想借款10W，本月要。</div>
+				<div class="case-info mui-clearfix">
+					<p class="public-time mui-pull-left">刚刚发布</p>
+					<p class="mui-pull-right">剩余时间：<span class="end-time">120</span>s</p>
+				</div>
+			</div>
+			<div class="case-item">
+				<div class="mui-clearfix">
+					<div class="case-name mui-pull-left">王女士</div>
+					<div class="mui-pull-right"><button type="button" class="mui-btn-blue" disabled>已结束</button></div>
+				</div>
+				<div>意向金额：<span class="need-money">1000</span>元</div>
+				<div class="case-condition">资质优秀，公务员，征信良好，以前没有做过小贷，想借款10W，下周要。</div>
+				<div class="case-info mui-clearfix">
+					<p class="public-time mui-pull-left">刚刚发布</p>
+					<p class="mui-pull-right">剩余时间：<span class="end-time">0</span></p>
+				</div>
+			</div>
+			<div class="case-item">
+				<div class="mui-clearfix">
+					<div class="case-name mui-pull-left">何先生</div>
+					<div class="mui-pull-right"><button type="button" class="mui-btn-blue" disabled>已结束</button></div>
+				</div>
+				<div>意向金额：<span class="need-money">1000</span>元</div>
+				<div class="case-condition"></div>
+				<div class="case-info mui-clearfix">
+					<p class="public-time mui-pull-left">刚刚发布</p>
+					<p class="mui-pull-right">剩余时间：<span class="end-time">0</span></p>
+				</div>
+			</div>
+		</div>
+		<div class="side-bar">
+			<a href=""><span class="mui-icon iconfont icon-jiahao"></span></a>
+		</div>
+		<footer class="mui-bar mui-bar-tab">
+			<a href="index.html" class="mui-tab-item">
+				<span class="mui-icon iconfont icon-zhinan"></span>
+				<span class="mui-tab-label">产品表</span>
+			</a>
+			<a class="mui-tab-item mui-active" href="grab.html">
+				<span class="mui-icon iconfont icon-shandian"></span>
+				<span class="mui-tab-label">抢单</span>
+			</a>
+			<a class="mui-tab-item" href="work-table1.html">
+				<span class="mui-icon iconfont icon-liebiao"></span>
+				<span class="mui-tab-label">工作台</span>
+			</a>
+			<a class="mui-tab-item" href="my.html">
+				<span class="mui-icon iconfont icon-wodedangxuan"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</footer>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.ready(function(){
+				var list= mui(".case-condition");
+				//上面的mui选择器等同于 var list=document.getElementsByClassName("case-condition")
+				for(var i in list){
+					if(list[i].innerText){
+						list[i].innerText=list[i].innerText.substring(0,8)+"****"+list[i].innerText.substring(list[i].innerText.length-8,list[i].innerText.length);
+						console.log(list[i].innerText)
+					}	
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<title>工作台</title>
+		<style type="text/css">
+			.mui-scroll-wrapper{
+				/* top:43px; */
+				min-height: 500px;
+				}
+			.search-bar{padding: 14px;background: #FFFFFF;}
+			.inner-bar{
+				padding-left: 10px;
+				background: #F5F5F5;
+				border-radius: 6px;
+				}
+			.inner-bar .mui-icon{font-size: 18px;color: #b5b4b4;}
+			.search-bar input[type=text]{
+				margin-bottom:0;
+				background: #F5F5F5;
+				height: 30px;
+				padding-left: 0;
+				width: 80%;
+				border: 0;
+			}
+			input::-webkit-input-placeholder { font-size: 14px;}
+			textarea::-webkit-input-placeholder { font-size: 14px;}
+			.tab-bar{padding: 12px 14px;padding-bottom: 0; background: #FFFFFF;margin-bottom: 6px;}
+			.mui-segmented-control .mui-control-item {
+				line-height: normal;
+				position: relative;
+				padding-bottom:8px;
+			}
+			#segmentedControl{/* padding-bottom: 14px; *//* border-bottom: 1px solid #E5E5E5; */}
+			#segmentedControl .iconfont{font-size: 24px;}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item .iconfont{
+				color: #4376e4;
+				border-bottom: 0;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item p{
+				color:#333;
+				font-size: 12px;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				border-bottom: 0;
+			}
+			.mui-segmented-control {
+				overflow: auto;
+			}
+			.mui-control-item.mui-active:after {
+				content: "";
+				display: block;
+				position: absolute;
+				z-index: 3;
+				width: 60%;
+				height: 4px;
+				left:20%;
+				color:#3778f6 ;
+				background: #3778f6;
+				bottom: -2px;
+			}
+			.roll-news{
+				padding:10px;background: #FFFFFF;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 6px;
+			}
+			/* .roll-news div{font-size: 14px;}
+			.roll-news span{font-size: 14px;color: #d8d8d8;};
+			.roll-news .news_list{
+				display: block;
+				height: 24px;
+				overflow: hidden;
+				-webkit-box-flex: 1.0;
+				-webkit-flex-grow: 1;
+				flex-grow: 1;
+			}
+			.news_list li{
+				padding:2px 0;
+				color: #E2554E;
+				text-overflow:ellipsis;        
+				overflow: hidden;
+				white-space: nowrap; 
+			} */
+			.customers-title{padding: 10px 0; text-align: center; font-size: 14px;font-weight: 600; color: #4376e4;background: #fff;}
+			.customers-title span{margin-right: 5px;font-weight: normal; /* vertical-align: middle; */}
+			.customers-item{
+				padding:6px 0;
+				background: #fff;
+				margin-bottom: 4px;
+				position: relative;
+			}
+			
+			.img-right{width: 50px; position: absolute;top: 0; right: 0;}
+			.customers-info{
+				border-top: 1px solid #d5d5d5;
+			}
+			.info-line{
+				display: block;
+				width: 6px;
+				height: 26px;
+				background: #3375e8;
+				float: left;
+				margin-right: 14px;
+			}
+			.item-top{position: relative;}
+			.item-top .mui-pull-right{margin-right: 20px; text-align: right;}
+			.money{font-size: 12px; color: #ef413b;}
+			.info-name,.customer-tel{font-size: 12px;}
+			.customer-name{font-size: 18px;font-weight: 600;padding: 4px 0;}
+			.customer-style{font-size: 18px;color: #E2554E;padding: 4px 0;}
+			.need-money,.sign-time{font-size: 12px;color: #9f9fa0;}
+			.customers-sign{padding: 16px 20px;}
+			.customers-info div{padding: 4px 0;}
+			.mui-btn-block{
+				margin-top: 14px;
+				padding: 10px;
+			}
+			select{padding:0;margin:0}
+			.customers-info input{border: 0;margin: 0;padding: 0;}
+			.do-item{
+				padding:6px 0;
+				background: #fff;
+				border-top:1px solid #E5E5E5;
+				margin-bottom: 4px;
+			}
+			.step{
+				padding: 6px;
+				padding-bottom: 0;
+				width: 300px;
+				margin: auto;
+				display: flex;
+				justify-content: center;
+			}
+			.step2{
+				padding: 6px;
+				width: 300px;
+				margin: auto;
+				display: flex;
+				justify-content: space-between;
+			}
+			.step2 li{
+				width: 74px;
+				text-align: center;
+			}
+			.step li{
+				text-align: center;
+			}
+			.setp-item-num{padding:6px 0;}
+			.setp-item-num span{
+				display: inline-block;
+				width:36px;
+				height: 36px; 
+				padding:8px;
+				border-radius: 50%;
+				font-size: 18px; 
+				color: #4376e4;
+				border: 1px solid #4376e4;
+			}
+			
+			/*改动*/
+			.doing.item-top{padding-top: 10px; border-top: 1px solid #E5E5E5;}
+			.step-line{display: inline-block;width: 70px; height: 1px;background: #4376e4;margin-top:24px;}
+			.setp-item-title{font-size: 12px;color: #333333;}
+			.step-item.active span{
+				color: #fff;
+				background: #4376e4;
+				border: 0;
+			}
+			.setp-item-time{font-size: 12px; color: #a9a9a9;}
+			.pre-money{padding: 4px 0; font-size: 12px; color: #8F8F94;}
+			.complete-item{
+				padding: 6px 0px;
+				background: #fff;
+				/* border-top:1px solid #D5D5D5; */
+				border-bottom:1px solid #D5D5D5;
+			}
+			.handle-bar{
+				margin: 16px 0;
+				width: 100%;
+				display: table;
+				background: #fff;
+				table-layout: fixed;
+				border-collapse: collapse;
+			}
+			.table-row{display: table-row;}
+			.table-cell {
+				display: table-cell;
+				padding: 4px 0;
+				text-align: center;
+				border: 1px solid #efefef;
+				border-left: 0;
+			}
+			.table-cell:last-child{
+				border-right: 0;
+			}
+			.handle-bar .mui-icon{font-size: 18px;color: #5576AB;}
+			.handle-bar p{font-size: 12px;}
+			.customer-needs{text-indent:16px;}
+			/* 改动 */
+			.sign{padding: 0 14px;}
+			.condition{padding: 0 14px 10px 14px;}
+			.condition-title{font-size: 12px;}
+			.condition-content{font-size: 14px;text-indent: 16px;color: #8f8f94;margin-top: 4px;}
+			.load-more{font-size: 12px;padding: 0;margin: 0;border: 0;color: #878787;}
+			.sign div:first-child{font-size: 12px;}
+			.sign-info p{font-size: 12px;}
+			.newSign{display: none; padding: 10px 14px;background: #fff;}
+			.submit-sign{text-align: right;}
+			.tip{text-align: center;padding-top:40px;}
+
+			
+			#segmentedControl .add-customer .iconfont{color: #e87757;}
+			/* 派单提示 */
+			.none-tip{padding:36px 15px;text-align: center;background: #FFFFFF;}
+			.tip-text{padding: 10px 40px;}
+			.none-img{width: 76px;margin: auto;}
+			.none-img img{width: 100%;}
+			/* 弹出框位置 */
+			#middlePopover {
+				width: 86%;
+				padding: 12px;
+				position: absolute;
+				left: 7%;
+				right: 7%;
+				background: #fff;
+			}
+			.border-bottom{
+				border-bottom: 1px solid #e5e5e5;
+			}
+			.product-name{color: #9F9FA0;font-size: 12px;}
+			#top-popover{
+				width:60%;
+				padding: 12px;
+				position: absolute;
+				left: 20%;
+				right: 20%;
+				background-color: rgba(0,0,0,0.7);
+			}
+			.mui-backdrop {
+				background-color: rgba(0,0,0,0.3);
+			}
+			.loading{
+				width: 50px;
+				padding:20px 0;
+				text-align: center;
+				margin:0 auto;
+			}
+			.loading i {
+				width:8px; 
+				border-radius:4px; 
+				height:8px; 
+				margin:0 4px; 
+				display:inline-block; 
+				background:#FFFFFF; 
+				float: left;
+			}
+			.loading i:nth-child(1) { animation: loading .8s linear 0.1s infinite;}
+			.loading i:nth-child(2) { animation: loading .8s linear 0.2s infinite;}
+			.loading i:nth-child(3) { animation: loading .8s linear 0.4s infinite;}
+			@-webkit-keyframes loading {
+					0% { transform: scale(0)}
+					100% { transform: scale(1)}
+			}
+			#top-popover p{text-align: center;color: #F5F5F5;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="search-bar">
+				<div class="inner-bar">
+					<span class="mui-icon mui-icon-search"></span>
+					<input type="text" class="input-search" placeholder="客户名称">
+				</div>
+			</div>
+			<div class="tab-bar">
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#my-customers">
+						<span class="iconfont icon-jiangbei1"></span>
+						<p>我的客户</p>
+						</a>
+					<a class="mui-control-item" href="#do-customers">
+						<span class="iconfont icon-gongzuo"></span>
+						<p>做单中</p>
+					</a>
+					<a class="mui-control-item" href="#complete-customers">
+						<span class="iconfont icon-yiwancheng1"></span>
+						<p>已完成</p>
+					</a>
+					<a class="add-customer mui-control-item" href="add-customer.html">
+						<!-- <span class="iconfont icon-xinzengkehu"></span> -->
+						<span class="iconfont icon-xinzengkehu1"></span>
+						<!-- <span class="iconfont icon-xinzengkehu2"></span> -->
+						<p>新增客户</p>
+					</a>
+				</div>
+			</div>
+			<!-- <div class="roll-news">
+				<div>他人做单</div>
+				<div class="news_list" style="height: 24px;overflow: hidden;flex-grow: 1;max-width:80%;">
+					<ul class="news-info">
+						<li>用户135****4243&nbsp;抢到周先生房贷一单&nbsp;意向金额100000万</li>
+						<li>用户158****3223&nbsp;抢到李女士车贷一笔&nbsp;意向金额50000元</li>
+						<li>马上开发完成，敬请期待</li>
+					</ul>
+				</div>
+			</div> -->
+			<div class="customers-list">
+				<div class="none-tip" id="none-tip" style="display: none;">
+					<div class="none-img"><img src="img/none.png" alt=""></div>
+					<p class="tip-text">暂无客户，您可以点击新增客户到我的客户或参与抢单</p>
+				</div>
+				<div id="my-customers" class="mui-control-content mui-active">
+					<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<div class="customers-title" >
+								<span class="iconfont icon-jiangbei1"></span>我的客户
+							</div>
+							<div id="my_customers">
+								<div class="customers-item">
+									<div class="item-top mui-clearfix">
+										<div class="info-line"></div>
+										<div class="mui-pull-left">
+											<div class="info-name">客户名称</div>
+											<div class="customer-name">张&nbsp;先生</div>
+											<div class="need-money">意向金额：1000000</div>
+										</div>
+										<div class="mui-pull-right">
+											<div class="customer-tel">130****4564</div>
+											<div class="customer-style">储备</div>
+											<div class="sign-time">2018-11-07 15:51</div>
+										</div>
+										<img class="img-right" src="img/share-right.png" >
+									</div>
+									<div class="handle-bar">
+										<div class="table-row">
+											<div class="table-cell">
+												<a href="tel:" class="telphone">
+													<p class="mui-icon iconfont icon-dianhua"></p>
+													<p>联系客户</p>
+												</a>
+											</div>
+											<div class="table-cell">
+												<a href="" class="open_sign" data-id="001">
+													<p class="mui-icon iconfont icon-msnui-sms-bubble" style="font-size: 20px;"></p>
+													<p>添加注记</p>
+												</a>
+											</div>
+											<div class="table-cell">
+												<a href="do-case.html" class="open-apply" data-id="001">
+													<p class="mui-icon iconfont icon-qingdan"></p>
+													<p>做单申请</p>
+												</a>
+											</div>
+											<div class="table-cell">
+												<a class="del-customer" data-id="001">
+													<p class="mui-icon iconfont icon-shanchu1"></p>
+													<p>删除客户</p>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="condition">
+										<div class="condition-title">客户资质：</div>
+										<div class="condition-content">
+											客户有车有房，打卡工资8000，征信无不良记录。
+										</div>
+									</div>
+									<div class="sign">
+										<div>最近注记：</div>
+										<div class="sign-list">
+											<div class="sign-item">
+												<p class="customer-needs">客户需要20万贷款，用于资金周转；觉得利息高点无所谓。下周二之前要。</p>
+												<p class="sign-time">2018-10-23&nbsp;10:35</p>
+											</div>
+											<button class="load-more" data-id="001">点击加载更多...</button>
+										</div>
+									</div>
+								</div>
+								<div class="customers-item">
+									<div class="item-top mui-clearfix">
+										<div class="info-line"></div>
+										<div class="mui-pull-left">
+											<div class="info-name">客户名称</div>
+											<div class="customer-name">张&nbsp;先生</div>
+											<div class="need-money">意向金额：1000000</div>
+										</div>
+										<div class="mui-pull-right">
+											<div class="customer-tel">130****4564</div>
+											<div class="customer-style">储备</div>
+											<div class="sign-time">2018-11-07 15:51</div>
+										</div>
+										<img class="img-right" src="img/share-right.png" >
+									</div>
+									<div class="handle-bar">
+										<div class="table-row">
+											<div class="table-cell">
+												<a href="tel:" class="telphone">
+													<p class="mui-icon iconfont icon-dianhua"></p>
+													<p>联系客户</p>
+												</a>
+											</div>
+											<div class="table-cell">
+												<a href="" data-id="001">
+													<p class="mui-icon iconfont icon-msnui-sms-bubble" style="font-size: 20px;"></p>
+													<p>添加注记</p>
+												</a>
+											</div>
+											<div class="table-cell">
+												<a href="do-case.html" class="open-apply" data-id="001">
+													<p class="mui-icon iconfont icon-qingdan"></p>
+													<p>做单申请</p>
+												</a>
+											</div>
+											<div class="table-cell">
+												<a class="del-customer" data-id="001">
+													<p class="mui-icon iconfont icon-shanchu1"></p>
+													<p>删除客户</p>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="condition">
+										<div class="condition-title">客户资质：</div>
+										<div class="condition-content">
+											客户有车有房，打卡工资8000，征信无不良记录。
+										</div>
+									</div>
+									<div class="sign">
+										<div>最近注记：</div>
+										<div class="sign-list">
+											<div class="sign-item">
+												<p class="customer-needs">客户需要20万贷款，用于资金周转；觉得利息高点无所谓。下周二之前要。</p>
+												<p class="sign-time">2018-10-23&nbsp;10:35</p>
+											</div>
+											<button class="load-more" data-id="001">点击加载更多...</button>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="do-customers" class="mui-control-content">
+					<div id="do-pullrefresh" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<div class="customers-title">
+								<span class="iconfont icon-gongzuo"></span>做单中
+							</div>
+							<div id="do_customers">
+								<div class="mui-loading" style="display: block;">
+									<span class="mui-spinner"></span>
+									<p style="text-align: center;padding-top: 18px;">拼命加载中...</p>
+								</div>
+								
+								<div class="do-item">
+									<ul class="step">
+										<li class="step-item active">
+											<div class="setp-item-num"><span class="iconfont icon-redact"></span></div>
+										</li>
+										<li class="step-line"></li>
+										<li class="step-item">
+											<div class="setp-item-num"><span class="iconfont icon-shenglvehao"></span></div>
+										</li>
+										<li class="step-line"></li>
+										<li class="step-item">
+											<div class="setp-item-num"><span class="iconfont icon-zhengque"></span></div>
+										</li>
+									</ul>
+									<ul class="step2">
+										<li>
+											<div class="setp-item-title">审核中</div>
+											<div class="setp-item-time">08-17 16:30</div>
+										</li>
+										<li>
+											<div class="setp-item-title">已通过</div>
+											<div class="setp-item-time"></div>
+										</li>
+										<li>
+											<div class="setp-item-title">已放款</div>
+											<div class="setp-item-time"></div>
+										</li>
+									</ul>
+									<div class="doing item-top mui-clearfix">
+										<div class="info-line"></div>
+										<div class="mui-pull-left">
+											<div class="info-name">客户名称</div>
+											<div class="customer-name">张&nbsp;先生</div>
+											<div class="product-name">锦城消费工薪贷</div>
+											<div class="need-money">贷款金额：1000000</div>
+										</div>
+										<div class="mui-pull-right">
+											<div class="customer-tel">130****4564</div>
+											<div class="pre-money">预计收益：<span class="customer-style">5000</span></div>
+											<div class="sign-time">2018-11-07 15:51</div>
+										</div>
+										<img class="img-right" src="img/doing-right.png" >
+									</div>
+								</div>
+								<div class="do-item">
+									<ul class="step">
+										<li class="step-item active">
+											<div class="setp-item-num"><span class="iconfont icon-redact"></span></div>
+										</li>
+										<li class="step-line"></li>
+										<li class="step-item">
+											<div class="setp-item-num"><span class="iconfont icon-shenglvehao"></span></div>
+										</li>
+										<li class="step-line"></li>
+										<li class="step-item">
+											<div class="setp-item-num"><span class="iconfont icon-zhengque"></span></div>
+										</li>
+									</ul>
+									<ul class="step2">
+										<li>
+											<div class="setp-item-title">审核中</div>
+											<div class="setp-item-time">08-17 16:30</div>
+										</li>
+										<li>
+											<div class="setp-item-title">已通过</div>
+											<div class="setp-item-time"></div>
+										</li>
+										<li>
+											<div class="setp-item-title">已放款</div>
+											<div class="setp-item-time"></div>
+										</li>
+									</ul>
+									<div class="doing item-top mui-clearfix">
+										<div class="info-line"></div>
+										<div class="mui-pull-left">
+											<div class="info-name">客户名称</div>
+											<div class="customer-name">张&nbsp;先生</div>
+											<div class="need-money">贷款金额：1000000</div>
+											<div class="product-name">还款方式：先息后本</div>
+										</div>
+										<div class="mui-pull-right">
+											<div class="customer-tel"><a data-id="18123456789">130****4564</a> </div>
+											<div class="pre-money">预计收益：<span class="customer-style">5000</span></div>
+											<div class="product-name">锦城消费工薪贷</div>
+											<div class="sign-time">2018-11-07 15:51</div>
+										</div>
+										<img class="img-right" src="img/doing-right.png" >
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="complete-customers" class="mui-control-content">
+					<div class="customers-title">
+						<span class="iconfont icon-yiwancheng1"></span>已完成
+					</div>
+					<div id="complete_customers">
+						<div class="complete-item">
+							<div class="item-top mui-clearfix">
+								<div class="info-line"></div>
+								<div class="mui-pull-left">
+									<div class="info-name">客户名称</div>
+									<div class="customer-name">张&nbsp;先生</div>
+									<div class="need-money">贷款金额：1000000</div>
+									<div class="need-money">放款金额：700000</div>
+								</div>
+								<div class="mui-pull-right">
+									<div class="customer-tel">130****4564</div>
+									<div class="pre-money">收益：<span class="customer-style">5000</span></div>
+									<div class="sign-time">兴业银行抵押贷</div>
+									<div class="sign-time">2018-11-07 15:51</div>
+								</div>
+								<img class="img-right" src="img/doing-right.png" >
+							</div>
+						</div>
+					</div>
+				</div
+			</div>
+		</div>
+		<footer class="mui-bar mui-bar-tab">
+			<a href="product-list.html" class="mui-tab-item">
+				<span class="mui-icon iconfont icon-shouye1"></span>
+				<span class="mui-tab-label">今日</span>
+			</a>
+			<a class="mui-tab-item" href="grab-case.html">
+				<span class="mui-icon iconfont icon-qiang"></span>
+				<span class="mui-tab-label">抢单</span>
+			</a>
+			<a class="mui-tab-item mui-active" href="work-table.html">
+				<span class="mui-icon iconfont icon-gongzuotai" style="font-size: 26px;"></span>
+				<span class="mui-tab-label">工作台</span>
+			</a>
+			<a class="mui-tab-item" href="my.html">
+				<span class="mui-icon iconfont icon-wo"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</footer>
+		<div class="mui-popover" id="top-popover">
+			<div class="loading mui-clearfix">
+				<i></i>
+				<i></i>
+				<i></i>
+			</div>
+			<p>数据加载中...</p>
+		</div>
+		<div class="mui-popover" id="middlePopover">
+			<textarea id='newSign' class="mui-input-clear" placeholder="请填写新的注记..."></textarea>
+			<p class="submit-sign">
+				<button type="button" id="submit-close" class="mui-btn-grey">取消</button>
+				<button type="button" id="submit-sign" class="mui-btn-blue">提交</button>
+			</p>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui.openWindow.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: '正在为您加载更多...',
+						contentnomore: '没有更多啦',
+						callback: pullupRefresh
+					},
+				}
+			});
+			// mui("#top-popover").popover("show");
+			var isOver=false;
+			pageIndex="1";
+			var scroll = mui('.mui-scroll-wrapper').scroll();
+			var borderLine= document.getElementsByClassName("customers-title")[0];
+			document.querySelector('.mui-scroll-wrapper' ).addEventListener('scroll', function (e ) {
+				//console.log(scroll.y);
+				if(scroll.y<0){
+						console.log(borderLine.style.borderBottom)
+						borderLine.style.borderBottom="2px solid #c0c0c0";
+				}
+			})
+			
+			function do_pullupRefresh(){
+				console.log(111)
+			}
+			function pullupRefresh() {
+				setTimeout(function () {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((isOver)); //参数为true代表没有更多数据了。
+					if (isOver == false) {
+						pageIndex++;
+						// getData();
+					}
+					console.log(pageIndex);
+				}, 500);
+			}
+			// 封装id选择器
+			function get(id){
+				return document.getElementById(id)
+			}
+			// 取首屏数据(我的客户)
+			function getData(){
+				mui.ajax('action/User.ashx',{
+					data:{
+						Judgem: "myCustomers",
+						Uid: Uid,
+						Tim: Tim,
+						customerStyle:"my",
+					},
+					beforeSend: function (request) {
+						request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:30000,//超时时间设置为10秒；
+					success:function(data){
+						if(data.result=="true"){
+							if(data.mycustomer.length==0){
+								get("my_customers").innerHTML="<p class='tip'>你暂时还没有客户</p>"
+							}else{
+								var items;
+								var my=data.mycustomer
+								for(var i in data.mycustomer){
+									items += "<div class='customers-item'>"+"<div class='item-top mui-clearfix'>"+"<div class='info-line'></div>"+"<div class='mui-pull-left'>"+"<div class='info-name'>客户名称</div>"+"<div class='customer-name'>"+my[i].name+"</div>"+"<div class='need-money'>"+"意向金额："+my[i].needmoney+"</div>"+"</div>"+"<div class='mui-pull-right>"+"<div class='customer-tel'>"+my[i].telphone+"</div>"+"<div class='customer-style'>"+my[i].style+"</div>"+"<div class='sign-time'>"+my[i].time+"</div>"+"</div>"+"</div>"+"<ul class='handle-bar'>"+"<li>"+"<a href='tel:"+data.telphone+"' class='telphone'>"+"<p class='mui-icon iconfont icon-dianhua'></p>"+"<p>联系客户</p>"+"</a>"+"</li>"+"<li>"+"<a href='#newSign' class='open-sign' data-id='"+my[i].id+"'>"+"<p class='mui-icon iconfont icon-msnui-sms-bubble' style='font-size: 20px;'></p>"+"<p>添加注记</p>"+"</a>"+"</li>"+"<li>"+"<a href='do-case.html' class='open-apply' data-id='"+my[i].id+"'>"+"<p class='ui-icon iconfont icon-qingdan'></p>"+"<p>做单申请</p>"+"</a>"+"</li>"+"<li>"+"<a class='del-customer' data-id='"+my[i].id+"'>"+"<p class='mui-icon iconfont icon-shanchu1'></p>"+"<p>删除客户</p>"+"</a>"+"</li>"+"</ul>"+"<div class='sign'>"+"<div>最近注记：</div>"+"<div class='sign-list'>"+"<div class='sign-item'>"+"<p class='customer-needs'>"+my[i].sign[0].signcontent+"</p>"+"<p class='sign-time'>"+my[i].sign[0].signtime+"</p>"+"</div>"+"<button class='load-more' data-id='"+my[i].id+"'>点击加载更多...</button>"+"</div>"+"</div>"+"</div>"
+								}
+								get("my_customers").innerHTML=items;
+								
+							}
+						}else{
+							mui.toast("获取数据失败")
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						mui.toast("连接服务器失败")
+// 							mui.openWindow({
+// 								url: '404.html',
+// 								id: '404'
+// 							})
+					}
+				});
+			}
+				//新闻滚动
+// 			var rollDiv= document.getElementsByClassName("news_list")[0];
+// 			function AutoScroll(obj) {
+// 					$(obj).find("ul:first").animate({
+// 						marginTop: "-24px"
+// 					},
+// 					1000,
+// 					function() {
+// 						$(this).css({
+// 							marginTop: "0"
+// 						}).find("li:first").appendTo(this);
+// 					}
+// 					);
+// 				}
+// 			$(function(){
+// 				setInterval('AutoScroll(".news_list")', 4000)
+// 			})
+			//跳转新增客户
+			mui("#segmentedControl").on("tap",".add-customer",function(){
+				location.href="add-customer.html";
+			})
+			// 注记及提交注记
+			var customerId;
+			mui(".handle-bar").on("tap",".open_sign",function(){
+				mui("#middlePopover").popover("show");
+				customerId=this.getAttribute("data-id");
+				get("newSign").focus();
+				console.log(11111)
+			})
+			document.getElementById("submit-sign").addEventListener("tap",function(){
+				if(document.getElementById("newSign").value!=""){
+					mui.ajax('action/User.ashx',{
+						data:{
+							Judgem: "postSign",
+							Uid: Uid,
+							Tim: Tim,
+							customerId:customerId,
+							sign:document.getElementById("newSign").value,
+							time:new Date().getTime()
+						},
+						beforeSend: function (request) {
+							request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:30000,//超时时间设置为10秒；
+						success:function(data){
+							if(data.result=="true"){
+								mui.toast("添加注记成功");
+								mui("#middlePopover").popover("hide");
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							mui.toast("连接服务器失败")
+							mui.openWindow({
+								url: '404.html',
+								id: '404'
+							})
+						}
+					});
+				}else{
+					mui.toast("请先填写注记内容！")
+				}
+			})
+			//跳转到做单页
+			mui(".handle-bar").on("tap",".open-apply",function(){
+				mui.openWindow({
+					url:'do-case.html',
+					id:'do-case',
+					extras:{
+						customerId:this.getAttribute('data-id')
+					},
+					
+				})
+			})
+			//删除客户
+			var deleteId;
+			mui(".handle-bar").on("tap",".del-customer",function(){
+				deleteId=this.getAttribute("data-id");
+				console.log(deleteId)
+				var btnArray = ["否", "是"];
+				mui.confirm("是否要删除该客户？", "确认", btnArray, function(e) {
+					if (e.index == 1) {
+						mui.ajax('action/User.ashx',{
+							data:{
+								Judgem: "deleteCostomer",
+								Uid: Uid,
+								Tim: Tim,
+								deleteId:deleteId
+							},
+							beforeSend: function (request) {
+								request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+							},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:30000,//超时时间设置为10秒；
+							success:function(data){
+								if(data.result==true){
+									mui.toast("成功删除该客户");
+								}else{
+									mui.toast("删除失败");
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								mui.toast("连接服务器失败")
+// 								mui.openWindow({
+// 									url: '404.html',
+// 									id: '404'
+// 								})
+							}
+						});
+					} else {
+						mui.toast("我再考虑考虑");
+					}
+				})
+			})
+			
+		</script>
+	</body>
+</html>

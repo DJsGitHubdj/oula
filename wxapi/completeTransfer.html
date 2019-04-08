@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>提现成功</title>
+		<style type="text/css">
+			.header{
+				padding:0 15px;
+				background: #FFFFFF;
+			}
+			.header-left{
+				float: left;
+				padding: 24px 0;
+				width: 50px;
+				height: 210px;
+				margin-right: 16px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.header-left .iconfont{
+				display: block;
+				line-height: 1;
+				font-size: 40px;
+				color: #DDDDDD;
+			}
+			.iconfont:nth-child(3){
+				font-size:26px ;
+			}
+			.iconfont:last-child{
+				 font-size: 20px;
+			 }
+			.iconfont.a_active{
+				color:#4279EC ;
+			}
+			.header-left .line{
+				width: 2px;
+				flex-grow: 1;
+				background: #DDDDDD;
+			}
+			.line.active{
+				background: #4279EC;
+			}
+			.header-right{
+				float: left;
+				padding: 24px 0;
+			}	
+			.title{font-size: 20px;}
+			p{font-size: 12px;}
+			.sub-title{font-size: 14px;}
+			.header-item{margin-bottom: 24px;}
+			.header-item:last-child{margin-bottom: 0;}
+			.container{padding:15px;background: #FFFFFF; text-align: center;}
+			#question{
+				color: #4376E4;
+				padding: 10px;
+				border: 0;
+				/* background: #4376E4; */
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header mui-clearfix">
+				<div class="header-left">
+					<span class="iconfont a_active icon-touxiang1"></span>
+					<span class="line active"></span>
+					<span class="iconfont a_active icon-jisuanqi"></span>
+					<span class="line"></span>
+					<span class="iconfont icon-kuaisu"></span>
+				</div>
+				<div class="header-right">
+					<div class="header-item">
+						<div class="title">申请成功</div>
+						<p>成功提交申请，等待后台处理</p>
+						
+					</div>
+					<div class="header-item">
+						<div class="sub-title">努力处理中</div>
+						<p>预计3-7个工作日到账，请关注您的资产</p>
+					</div>
+					<div class="header-item">
+						<div class="sub-title">转账成功</div>
+						<p></p>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<button type="button" id="question" class="mui-btn-block">知道了</button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.ready(function(){
+				function get(id){
+					return document.getElementById(id)
+				};
+				get("question").addEventListener("tap",function(){
+					location.href="my.html";
+				})
+			})
+		</script>
+	</body>
+</html>

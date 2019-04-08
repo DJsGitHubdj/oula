@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hello MUI</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <!--标准mui.css-->
+        <link rel="stylesheet" href="css/mui.min.css"> 
+        <!--App自定义的css-->
+        <!--<link rel="stylesheet" type="text/css" href="../css/app.css"/>-->
+        <style>
+            .mui-table-view-cell.mui-collapse-3 .mui-table-view .mui-table-view-cell:last-child:after, .mui-table-view-cell.mui-collapse-3 .mui-table-view:after, .mui-table-view-cell.mui-collapse-3 .mui-table-view:before { height:0 }
+            .mui-table-view-cell.mui-collapse-3>.mui-navigate-right:after, .mui-table-view-cell.mui-collapse-3>.mui-push-right:after { content:'\e581' }
+            .mui-table-view-cell.mui-collapse-3.mui-active { margin-top:-1px }
+            .mui-table-view-cell.mui-collapse-3.mui-active>.mui-navigate-right:after, .mui-table-view-cell.mui-collapse-3.mui-active>.mui-push-right:after { content:'\e580' }
+            .mui-table-view-cell.mui-collapse-3 .mui-collapse-content>.mui-input-group, .mui-table-view-cell.mui-collapse-3 .mui-collapse-content>.mui-slider { width:auto; height:auto; margin:-8px -15px }
+            .mui-table-view-cell.mui-collapse-3 .mui-collapse-content>.mui-slider { margin:-8px -16px }
+            .mui-table-view-cell.mui-collapse-3 .mui-table-view { display:none; margin-top:11px; margin-right:-15px; margin-bottom:-11px; margin-left:-15px; border:0 }
+            .mui-table-view-cell.mui-collapse-3 .mui-table-view.mui-table-view-chevron { margin-right:-65px }
+            .mui-table-view-cell.mui-collapse-3 .mui-table-view .mui-table-view-cell { padding-left:31px; background-position:31px 100% }
+            .mui-collapse-content{margin-left: 30px;}
+        </style>
+    </head>
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">人员选择</h1>
+        </header>
+        <div class="mui-content">
+            <div class="mui-card">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell mui-collapse-3">
+                        <a class="mui-navigate-right" href="#">信贷审核人员</a>
+                        <ul class="mui-table-view">
+                            <li class="mui-table-view-cell mui-collapse-3">
+                                <a class="mui-navigate-right" href="#">信贷审核人员</a>
+                                <ul class="mui-table-view">
+                                    <li class="mui-table-view-cell mui-collapse" id="list_li">
+					                    <a class="mui-navigate-right" href="#">信贷审核人员</a>
+					                    <div class="mui-collapse-content">
+					                        <div class="mui-input-al">
+					                        <div class="mui-input-row mui-checkbox" id="mui-input-row">
+					                            <img class="mui-input-row-tu" src="img/003.jpg" alt="" />
+					                            <label class="mui-input-row-name">刘三</label>
+					                          <input name="checkbox1" type="checkbox" value="Item 1">
+					                        </div>
+					                        </div>
+					                    </div>
+					                </li>
+					           </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="js/mui.min.js"></script>
+        <script>
+            mui.init({
+                swipeBack:true //启用右滑关闭功能
+            });
+		
+            var inputTap = false;
+            mui('.mui-card').on('tap','.allSelect',function(){
+                inputTap=true;
+            });
+            mui('.mui-card').on('tap','.mui-navigate-right',function(){
+                if(inputTap){
+                    inputTap=false;
+                    return;
+                }
+                //记录状态
+                var li=this.parentNode;
+                var ul=this.parentNode.querySelector('.mui-table-view');
+                var _style=ul.style.display;
+                //关闭同级菜单
+                var parent=this.parentNode.parentNode.children;
+                for(var i=0;i<parent.length;i++){
+                    if(!!parent[i].querySelector('.mui-table-view')){
+                        parent[i].querySelector('.mui-table-view').style.display='';
+                        removeClass(parent[i], 'mui-active');
+                    }
+                }
+                //更改状态
+                if(_style=='block'){
+                    ul.style.display='';
+                    removeClass(li,'mui-active');
+                }else{
+                    ul.style.display='block';
+                    addClass(li,'mui-active');
+                }
+                //关闭下级子菜单
+                var children=ul.children;
+                for(var i=0;i<children.length;i++){
+                    var child=children[i].querySelector('.mui-table-view');
+                    if(!!child){
+                        child.style.display='';
+                        removeClass(children[i], 'mui-active');
+                    }
+                }
+            }); 
+            function hasClass(obj, cls) {  
+                return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));  
+            }  
+            function addClass(obj, cls) {  
+                if (!this.hasClass(obj, cls)) obj.className += " " + cls;  
+            }  
+            function removeClass(obj, cls) {  
+                if (hasClass(obj, cls)) {  
+                    var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');  
+                    obj.className = obj.className.replace(reg, '');  
+                }  
+            }  
+        </script>
+    </body>
+</html>

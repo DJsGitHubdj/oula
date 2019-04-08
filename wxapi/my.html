@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/public.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+    <title>个人中心</title>
+    <style type="text/css">
+        .my-list .iconfont {
+            display: inline-block;
+            font-size: 24px;
+            padding-top: 5px;
+        }
+
+        header .mui-icon {
+            color: #fff;
+        }
+
+        .info-title {
+            position: relative;
+            overflow: hidden;
+            padding: 30px 15px;
+            width: 100%;
+            height: 120px;
+            background: url(img/5.png);
+        }
+
+        .my-cont, .my-rank {
+            padding-top: 6px;
+        }
+
+        .my-rank {
+            margin-left: 40px;
+        }
+
+        .rank {
+            width: 70px;
+        }
+
+            .rank img {
+                display: block;
+                width: 100%;
+            }
+
+        .my-cont .iconfont {
+            vertical-align: middle;
+            color: #fff;
+        }
+
+            .my-cont .iconfont::after {
+                content: "丨";
+                font-size: 14px;
+                color: #7c859e;
+                vertical-align: baseline;
+            }
+
+        .my-img {
+            width: 58px;
+            height: 58px;
+            margin-right: 12px;
+        }
+
+            .my-img img {
+                display: block;
+                width: 100%;
+                border-radius: 50%;
+                border: 2px solid #abb5cd;
+            }
+
+        #my-name {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .info-title .mui-badge {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            padding: 0;
+            vertical-align: top;
+        }
+
+        .weal {
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .mission {
+            text-align: right;
+            margin-top: 0;
+        }
+
+        @-webkit-keyframes mymove {
+            0% {
+                bottom: -12px;
+            }
+            
+            50% {
+                bottom: -16px;
+            }
+            
+            100% {
+                bottom: -12px;
+            }
+        }
+        .mission {
+            position: absolute;
+            right: 0;
+            bottom: -12px;
+            width: 120px;
+            -webkit-animation-name: mymove; /*定义动画的名字，和keyframes定义的动画名一样*/
+            -webkit-animation-duration: 3000ms; /*动画持续时间*/
+            -webkit-animation-timing-function: ease-in-out; /*动画频率，和transition-timing-function是一样的*/
+            -webkit-animation-delay: 2s; /*动画延迟时间*/
+            -webkit-animation-iteration-count: infinite; /*定义循环资料，infinite为无限次*/
+        }
+
+            .mission img {
+                width: 100%;
+            }
+
+        .my-info {
+            display: block;
+            padding: 0 16px;
+            height: 50px;
+            line-height: 50px;
+            background: #fff;
+            margin-bottom: 5px;
+        }
+
+            .my-info p {
+                margin: 0;
+            }
+
+            .my-info a {
+                display: block;
+                color: #878787;
+                font-size: 14px;
+            }
+
+            .my-info .mui-icon, .list-title .mui-icon {
+                font-size: 18px;
+                margin-left: 6px;
+                color: #d5d5d5;
+            }
+
+        .list-title {
+            padding:15px;
+            background: #fff;
+        }
+
+            .list-title a {
+                display: inline-block;
+                width: 60%;
+                text-align: right;
+            }
+
+        #my-money {
+            color: #8f8f94;
+        }
+
+        .my-list {
+            width: 100%;
+            display: table;
+            background: #fff;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .table-row {
+            display: table-row;
+        }
+
+            .table-row .table-cell:last-child {
+                border-right: 0;
+            }
+
+        .table-cell {
+            display: table-cell;
+            width: 49.9%;
+            padding: 12px 0;
+            border: 1px solid #E5E5E5;
+            border-left: 0;
+        }
+
+        .table-cell-left {
+            margin-left: 14px;
+            margin-right: 12px;
+            color: #6d97eb;
+        }
+
+        .table-cell-right div {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .table-cell-right p {
+            font-size: 12px;
+            margin-bottom: 0;
+        }
+
+        .my-bottom {
+            margin-top: 5px;
+        }
+
+            .my-bottom .mui-icon {
+                color: #969696;
+                font-size: 22px;
+                margin-right: 12px;
+                vertical-align: middle;
+            }
+
+            .my-bottom .iconfont {
+                color: #969696;
+                font-size: 24px;
+                margin-right: 12px;
+                vertical-align: middle;
+            }
+
+            .my-bottom span:last-child {
+                font-size: 14px;
+            }
+
+        .mui-table-view::before {
+            height: 0;
+        }
+
+        .mui-table-view::after {
+            height: 0;
+        }
+
+        .mui-popover {
+            width: 86%;
+            padding: 12px 0;
+            position: absolute;
+            left: 7%;
+            right: 7%;
+            top: 26%;
+            background: #fff;
+        }
+		#focus-us{
+			padding: 12px;
+			left:7%;
+			top:15%;
+			font-size: 14px;
+			text-align: center;
+		}
+		#focus-us .mui-icon{
+			color: #3375EB;
+			vertical-align: middle;
+		}
+		#focus-us span{
+			display: inline-block;
+			line-height: 32px;
+			vertical-align: middle;
+			margin-right: 6px;
+			color: #333;
+		}
+		#focus-us img{
+			display: block;
+			max-width: 100%;
+			margin: auto;
+		}
+        .popover-title {
+            padding: 10px 15px;
+            font-weight: 500;
+        }
+
+        .form {
+            padding: 10px 18px;
+        }
+
+            .form input {
+                height: 44px;
+            }
+
+            .form .mui-btn-block {
+                padding: 8px;
+                background: #2e3131;
+                color: #fff;
+            }
+
+        #code {
+            width: 65%;
+            float: left;
+            margin-right: 4px;
+        }
+
+        #getCode {
+            width: 32%;
+            height: 44px;
+            float: right;
+            color: #2e3131;
+            font-size: 12px;
+        }
+        /* 弹出层底层透明度设置 */
+        .mui-backdrop {
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        #submit {
+            border: 0;
+        }
+		/* 改动 */
+        .total-count {
+           	width: 100%;
+			margin:4px 0;
+           	display: table;
+           	background: #fff;
+           	table-layout: fixed;
+           	border-collapse: collapse;
+        }
+
+            .total-count div {
+                font-size: 14px;
+				color: #333;
+            }
+
+            .total-count p {
+                font-size: 12px;
+                margin-bottom: 0;
+            }
+            .total-count .iconfont {
+                display: inline-block;
+                color: #e87757;
+                font-size: 22px;
+                margin: 4px 12px 2px 14px;
+            }
+
+        .total-pay {
+            color: #e87757;
+        }
+
+      #end-time{-webkit-transform: scale(0.7);font-size: 12px;color: #F5F5F5;margin-left: -16px;}
+	/* 二维码弹窗 */
+	#top-popover{padding: 30px;}
+	#topPopover .iconfont{color: #666666;}
+	#top-popover #close{position: absolute;top:10px;right: 10px;}
+	#code-img{display: block;width: 100%;}
+	.top-popover-tip{text-align: center; font-size: 12px; color: #888888;}
+	.vip-total{
+		display: block;
+		height: 72px;
+		overflow: hidden;
+		margin: 4px 0;
+		margin-bottom: 2px;
+	}
+	#go-vip-total{display: block;}
+	#vip-total{display: block;width: 100%;max-height: 100%;}
+	</style>
+</head>
+<body>
+    <div class="mui-content">
+        <div class="info-title mui-clearfix">
+            <div class="my-img mui-pull-left"><img id="my-img" src="img/head.png" alt="0"></div>
+            <div class="my-cont mui-pull-left">
+                <div id="my-name">昵称</div>
+                <div class="rank"><img id='rank' src="img/vip01.png" alt=""></div>
+            </div>
+            <div class="mui-pull-right mission-list">
+                <a href="buy-vip.html" style="display: block;">
+                    <div class="weal">了解详情<span class="mui-badge mui-badge-danger"></span></div>
+                    <div class="mission"><img src="img/top.png"></div>
+                </a>
+            </div>
+        </div>
+        <div class="my-info mui-clearfix">
+            <div class="mui-pull-left" id="topPopover">个人信息 <span class="iconfont icon-erweima"></span></div>
+            <a href="vip-card.html" class="mui-pull-right">绑定手机号 <span id="my-tel">(未绑定)</span><span class="mui-icon mui-icon-arrowright"></span></a>
+        </div>
+        <div class="list-title mui-clearfix">
+            <div class="mui-pull-left">我的资产</div>
+            <a href="my-asset.html" class="mui-pull-right"><span id="my-money">0.00</span> <span class="mui-icon mui-icon-arrowright"></span></a>
+        </div>
+        <div class="my-list">
+            <div class="table-row">
+                <a class="table-cell mui-clearfix" href="invite.html">
+                    <div class="table-cell-left mui-pull-left"><span class="iconfont icon-yaoqing"></span></div>
+                    <div class="table-cell-right mui-pull-left">
+                        <div>邀请好友</div>
+                        <p>成功邀请&nbsp;得10元</p>
+                    </div>
+                </a>
+                <a class="table-cell" href="send-case.html">
+                    <div class="table-cell-left mui-pull-left"><span class="iconfont icon-baodanbi" style="font-size: 22px;"></span></div>
+                    <div class="table-cell-right mui-pull-left">
+                        <div>报单提佣</div>
+                        <p>报单成功&nbsp;单笔49元</p>
+                    </div>
+                </a>
+            </div>
+            <div class="table-row">
+                <a class="table-cell" href="share.html">
+                    <div class="table-cell-left mui-pull-left"><span class="iconfont icon-fenxiang1"></span></div>
+                    <div class="table-cell-right mui-pull-left">
+                        <div>分享有赏</div>
+                        <p>分享成功越多越有</p>
+                    </div>
+                </a>
+                <a class="table-cell" href="recharge.html">
+                    <div class="table-cell-left mui-pull-left"><span class="iconfont icon-chongzhi"></span></div>
+                    <div class="table-cell-right mui-pull-left">
+                        <div>充值抢单</div>
+                        <p>微信支付</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+		<!-- 改动 -->
+		<div class="total-count">
+			<div class="table-row">
+				<a href="commendList.html" class="table-cell">
+					<div class="mui-pull-left"> <span class="iconfont icon-ren"></span></div>
+					<div class="mui-pull-left">
+						<div>推荐汇总</div>
+						<p>我推荐的用户</p>
+					</div>
+				</a>
+				<a href="incomingTotal.html" class="table-cell">
+					<div class="mui-pull-left"><span class="iconfont icon-tongji"></span></div>
+					<div class="mui-pull-left">
+						<div>进件统计</div>
+						<p>业务员进件</p>
+					</div>
+				</a>
+			</div>
+			<div class="table-row">
+				<a href="my-asset.html" class="table-cell">
+						<div class="mui-pull-left"> <span class="iconfont icon-quxian"></span></div>
+						<div class="mui-pull-left">
+							<div>累计发放工资</div>
+							<div class="total-pay">¥<span id="total-pay">0.00</span></div>
+						</div>
+				</a>
+				<a href="sale-tip.html" class="table-cell">
+					<div class="mui-pull-left"><span class="iconfont icon-tongzhi1" style="font-size: 24px;"></span></div>
+					<div class="mui-pull-left">
+						<div>开售提醒</div>
+						<p>好产品&nbsp;不错过</p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="vip-total">
+			<a id="go-vip-total"><img id="vip-total" src="img/svip3.jpg"></a>
+		</div>
+		<ul class="my-bottom mui-table-view">
+				<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="help.html">
+								<span class="mui-icon mui-icon-help"></span><span>帮助中心</span>
+						</a>
+				</li>
+				<li class="mui-table-view-cell">
+						 <a class="mui-navigate-right" href="feedback.html">
+								 <span class="mui-icon mui-icon-email"></span><span>问题反馈</span>
+						 </a>
+				 </li>
+				<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" href="about-us.html">
+								<span class="mui-icon mui-icon-info"></span><span>关于我们</span>
+						</a>
+				</li>
+		</ul>
+        <!-- 弹出层 -->
+		<div id="top-popover" class="mui-popover">
+			<div class="mui-loading" id="mui-loading" style="display: block;margin-top: 20px;">
+				<div class="mui-spinner"></div>
+			</div>
+			<img id="code-img" src="img/code.png">
+			<p class="top-popover-tip">扫一扫上面的二维码图案，加入我们</p>
+			<div id="close"><span class="mui-icon mui-icon-close"></span></div>
+		</div>
+        <div id="popover" class="mui-popover">
+            <div class="popover-title">绑定手机号</div>
+            <form class="form">
+                <div class="mui-input-row">
+                    <input type="tel" class="mui-input-clear" placeholder="请输入手机号" maxlength="11" id="tel">
+                </div>
+                <div class="mui-input-row">
+                    <input type="tel" placeholder="请输入验证码" maxlength="6" id="code">
+                    <button type="button" class="mui-btn-mini" id="getCode">获取验证码</button>
+                </div>
+                <div class="mui-button-row">
+                    <button type="button" class="mui-btn mui-btn-block" id="submit">确认</button>
+                </div>
+            </form>
+        </div>
+		<!-- 关注弹窗 -->
+		<div id="focus-us" class="mui-popover">
+			<i class="mui-icon mui-icon-info"></i>
+			<span>长按关注欧啦联盟公众号</span>
+			<img src="img/focus.jpg">
+		</div>
+    </div>
+    <footer class="mui-bar mui-bar-tab">
+        <a href="product-list.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon-shouye1"></span>
+            <span class="mui-tab-label">今日</span>
+        </a>
+        <a class="mui-tab-item" href="grab-case.html">
+            <span class="mui-icon iconfont icon-qiang"></span>
+            <span class="mui-tab-label">抢单</span>
+        </a>
+        <a class="mui-tab-item" href="work-table.html">
+            <span class="mui-icon iconfont icon-gongzuotai" style="font-size: 26px;"></span>
+            <span class="mui-tab-label">工作台</span>
+        </a>
+        <a class="mui-tab-item mui-active" href="my.html">
+            <span class="mui-icon iconfont icon-wo"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </footer>
+    <script src="js/mui.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script type="text/javascript">
+		// 服务器改动
+		// mui("#focus-us").popover("show");
+		// mui("#top-popover").popover("show");
+		mui(".mui-loading")[0].style.display="none"
+        mui.init()
+        mui.ready(function () {
+            //base64转码函数
+            function base64ToUtf_8(str) {
+                return decodeURIComponent(escape(atob(str)));
+            }
+            //获取cookie
+            function getCookie(c_name) {
+                if (document.cookie.length > 0) {
+                    c_start = document.cookie.indexOf(c_name + "=")
+                    if (c_start != -1) {
+                        c_start = c_start + c_name.length + 1
+                        c_end = document.cookie.indexOf(";", c_start)
+                        if (c_end == -1) c_end = document.cookie.length
+                        return unescape(document.cookie.substring(c_start, c_end))
+                    }
+                }
+                return "";
+            }
+            var userInfo = base64ToUtf_8(getCookie('userInfo'));
+            var SafeCode = "";
+            var Uid = "";
+            var Tim = "";
+            var tiket = "";
+            var appId = "";
+            var purl = location.href.split('#')[0];
+
+            if (userInfo != "") {
+                var userInfoArr = userInfo.split("$");
+                SafeCode = userInfoArr[0];
+                Uid = userInfoArr[1];
+                Tim = userInfoArr[2];
+                tiket = userInfoArr[3];
+                appId = userInfoArr[4];
+            }
+            // 封装id选择器
+            var get = function (id) {
+                return document.getElementById(id);
+            };
+            mui('.mui-bar-tab').on('tap', 'a', function () {
+                location.href = this.getAttribute('href');
+            })
+			get("go-vip-total").addEventListener("tap",function(){
+				location.href=""
+			})
+			get("topPopover").addEventListener("tap",function(){
+				mui.scrollTo( 0,100);
+				mui("#top-popover").popover("show");
+				mui.ajax('url',{
+					data:{},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					success:function(data){
+						if(data.result=="true"){
+							get("code-img").src="data.url";
+							get("mui-loading").style.display="none";
+						}else{
+							mui.toast("生成二维码错误")
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						
+					}
+				});
+				
+			})
+			get("close").addEventListener("tap",function(){
+				mui("#top-popover").popover("hide");
+			})
+            // 禁止用户点击遮罩层关闭弹出层,不通过验证将无法体验其他页面.
+            window.addEventListener('tap', function (e) {
+                e.target.className == 'mui-backdrop mui-active' && e.stopPropagation();
+            }, true);
+
+            //config签名验证
+            // configValidate();
+            function configValidate() {
+                mui.ajax('action/User.ashx', {
+                    data: {
+                        "Judgem": "configValidate",
+                        "tiket": tiket,
+                        "purl": purl,
+                        "openid": Uid,
+                        "time": Tim
+                    },
+                    beforeSend: function (request) {
+                        request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                    },
+                    dataType: 'text',//服务器返回json格式数据
+                    type: 'post',//HTTP请求类型
+                    success: function (data) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.result == "true") {
+                            wx.config({
+                                debug: false, //
+                                appId: jsonData.appId, // 必填，公众号的唯一标识
+                                timestamp: jsonData.timestamp, // 必填，生成签名的时间戳
+                                nonceStr: jsonData.nonceStr, // 必填，生成签名的随机串
+                                signature: jsonData.signature, // 必填，签名，见附录1
+                                jsApiList: ['hideAllNonBaseMenuItem', 'updateAppMessageShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                            });
+                            wx.ready(function () {
+                                wx.hideAllNonBaseMenuItem();
+                            });
+                        } else {
+                            mui.openWindow({
+                                url: '404.html',
+                                id: '404'
+                            })
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        mui.openWindow({
+                            url: '404.html',
+                            id: '404'
+                        })
+                    }
+                });
+            }
+
+            // login();
+            function login() {
+                mui.ajax('action/User.ashx', {
+                    data: {
+                        "Judgem": "getUserInfo",
+                        "openid": Uid,
+                        "time": Tim
+                    },
+                    beforeSend: function (request) {
+                        request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                    },
+                    dataType: 'text',//服务器返回json格式数据
+                    type: 'post',//HTTP请求类型
+                    success: function (data) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.result == "true") {
+
+                            if (jsonData.name != "") {
+                                get("my-name").innerText = jsonData.name;
+                            }
+                            if (jsonData.linkphone != "") {
+                                get("my-tel").innerText = "(" + jsonData.linkphone + ")";
+                            } else {
+                                mui.toast("未测到您的手机号，请先绑定手机号")
+                                mui("#popover").popover("show");
+                            }
+                            if (jsonData.mymoney != "") {
+                                get("my-money").innerText = jsonData.mymoney;
+                            }
+                            if (jsonData.grade == "1") {
+                                get("rank").src = "img/vip01.png";
+                            }else{
+								document.getElementsByClassName("info-title")[0].style.background="url(img/vip-bg.png)"
+							}
+                            if (jsonData.head_img != "") {
+                                get("my-img").src = jsonData.head_img;
+                            }
+                        } else {
+                            mui.openWindow({
+                                url: '404.html',
+                                id: '404'
+                            })
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        mui.openWindow({
+                            url: '404.html',
+                            id: '404'
+                        })
+                    }
+                });
+            }
+
+
+            //确认手机号,获取验证码
+            document.getElementById("getCode").addEventListener("tap", function () {
+                var that = this;
+                var count = 60;
+                var regPhone = /^1[345789]\d{9}$/;
+                if (!regPhone.test(document.getElementById("tel").value)) {
+                    mui.toast("请输入正确的手机号！");
+                } else {
+                    that.disabled = true;
+                    var timer = setInterval(function () {
+                        if (count > 1) {
+                            count--;
+                            that.innerText = count + "s后重发";
+                        } else {
+                            that.innerText = "获取验证码";
+                            that.disabled = false;
+                            clearInterval(timer); //清除计时器
+                        }
+                    }, 1000);
+                    mui.ajax('action/User.ashx', {
+                        data: {
+                            "Judgem": "getValidateCode",
+                            "openid": Uid,
+                            "time": Tim,
+                            "mobile": document.getElementById("tel").value
+                        },
+                        beforeSend: function (request) {
+                            request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                        },
+                        dataType: 'text',//服务器返回json格式数据
+                        type: 'post',//HTTP请求类型
+                        timeout: 10000,//超时时间设置为10秒；
+                        success: function (data) {
+                            if (jsonData.result == "validateIdenError") {
+                                mui.toast("身份验证失败")
+                            } else if (jsonData.result == "sendCodeError ") {
+                                mui.toast("获取验证码错误")
+                            }
+                        },
+                        error: function (xhr, type, errorThrown) {
+                            mui.toast("网络连接错误，请稍后再试")
+                        }
+                    });
+                }
+            })
+            //提交更新个人数据
+            document.getElementById("submit").addEventListener("tap", function () {
+                var userCode = document.getElementById("code").value;
+                var userPhone = document.getElementById("tel").value;
+                if (userCode !== "" && userPhone != "") {
+                    mui.ajax('action/User.ashx', {
+                        data: {
+                            "Judgem": "getRegisterMobile",
+                            "openid": Uid,
+                            "time": Tim,
+                            "mobile": userPhone,
+                            "code": userCode
+                        },
+                        beforeSend: function (request) {
+                            request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                        },
+                        dataType: 'text',//服务器返回json格式数据
+                        type: 'post',//HTTP请求类型
+                        timeout: 10000,//超时时间设置为10秒；
+                        success: function (data) {
+                            var jsonData = JSON.parse(data);
+                            if (jsonData.result == "getRegisterMobileError") {
+                                mui.toast("验证失败")
+                            } else {
+                                get("my-tel").innerText = "(" + jsonData.resultMobile + ")";
+                                mui.toast("个人手机号码更新成功！")
+                                mui("#popover").popover("hide");
+								mui.scrollTo( 0,100);
+								mui("#focus-us").popover("show");
+								
+                            }
+                        },
+                        error: function (xhr, type, errorThrown) {
+                            mui.toast("网络连接错误，请稍后再试。")
+                        }
+                    });
+                } else {
+                    mui.toast("手机验证码错误！请核对后重新输入！")
+                }
+            })
+// 			get("focus-a").addEventListener("tap",function(){
+// 				mui("#focus-us").popover("hide");
+// 				location.href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU5Mzc0ODUxMQ==&scene=126&bizpsid=0&subscene=0#wechat_redirect";
+// 			})
+            mui('.my-list').on('tap', 'a', function () {
+                location.href = this.getAttribute('href');
+
+            })
+            mui('.list-title').on('tap', 'a', function () {
+                location.href = this.getAttribute('href');
+                console.log(location.href)
+            })
+            mui('.my-bottom').on('tap', 'a', function () {
+                location.href = this.getAttribute('href');
+            })
+            mui(".my-info").on("tap", "a", function () {
+                location.href = this.getAttribute('href') + '?type=1';
+            })
+            mui(".total-count").on("tap", "a", function () {
+                location.href = this.getAttribute('href') + '?type=1';
+            })
+            mui(".mission-list").on("tap", "a", function () {
+                mui.ajax('Action/User.ashx', {
+                    data: {
+                        Judgem: "getUserExt",
+                        Uid: Uid,
+                        Tim: Tim
+                    },
+                    beforeSend: function (request) {
+                        request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                    },
+                    dataType: 'text',//服务器返回json格式数据
+                    type: 'post',//HTTP请求类型
+                    success: function (data) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.result == "validateIdenError") {
+                            mui.openWindow({
+                                url: '404.html',
+                                id: '404'
+                            })
+                        } else {
+                            var userInfo = jsonData.userInfo[0];
+                            if (userInfo.identity != "" && userInfo.name != "") {
+                                location.href = 'buy-vip.html?type=0';
+                            } else {
+                                location.href = 'vip-card.html';
+                            }
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        mui.openWindow({
+                            url: '404.html',
+                            id: '404'
+                        })
+                    }
+                });
+            })
+        })
+    </script>
+</body>
+</html>

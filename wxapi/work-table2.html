@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/public.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <title>工作台</title>
+    <style type="text/css">
+        .mui-content::after {
+            content: "";
+            height: 60px;
+        }
+
+        .mui-pull-bottom-pocket {
+            height: 80px;
+        }
+
+        .mui-scroll-wrapper {
+            top: 132px;
+            min-height: 200px;
+        }
+
+        .search-bar {
+            padding: 14px;
+            background: #FFFFFF;
+        }
+
+        .inner-bar {
+            padding-left: 10px;
+            background: #F5F5F5;
+            border-radius: 6px;
+        }
+
+            .inner-bar .mui-icon {
+                font-size: 18px;
+                color: #b5b4b4;
+            }
+
+        .search-bar input[type=text] {
+            margin-bottom: 0;
+            background: #F5F5F5;
+            height: 30px;
+            padding-left: 0;
+            width: 80%;
+            border: 0;
+        }
+
+        input::-webkit-input-placeholder {
+            font-size: 14px;
+        }
+
+        textarea::-webkit-input-placeholder {
+            font-size: 14px;
+        }
+
+        .tab-bar {
+            padding: 12px 14px;
+            padding-bottom: 0;
+            background: #FFFFFF;
+            margin-bottom: 6px;
+        }
+
+        .mui-segmented-control .mui-control-item {
+            line-height: normal;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        #segmentedControl { /* padding-bottom: 14px; */ /* border-bottom: 1px solid #E5E5E5; */
+        }
+
+            #segmentedControl .iconfont {
+                font-size: 24px;
+            }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item .iconfont {
+            color: #4376e4;
+            border-bottom: 0;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item p {
+            color: #333;
+            font-size: 12px;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            border-bottom: 0;
+        }
+
+        .mui-segmented-control {
+            overflow: auto;
+        }
+
+        .mui-control-item.mui-active:after {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: 3;
+            width: 60%;
+            height: 4px;
+            left: 20%;
+            color: #3778f6;
+            background: #3778f6;
+            bottom: -2px;
+        }
+
+        .roll-news {
+            padding: 10px;
+            background: #FFFFFF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        /* .roll-news div{font-size: 14px;}
+            .roll-news span{font-size: 14px;color: #d8d8d8;};
+            .roll-news .news_list{
+                display: block;
+                height: 24px;
+                overflow: hidden;
+                -webkit-box-flex: 1.0;
+                -webkit-flex-grow: 1;
+                flex-grow: 1;
+            }
+            .news_list li{
+                padding:2px 0;
+                color: #E2554E;
+                text-overflow:ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            } */
+        .customers-title {
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4376e4;
+            background: #fff;
+        }
+
+            .customers-title span {
+                margin-right: 5px;
+                font-weight: normal; /* vertical-align: middle; */
+            }
+
+        .customers-item {
+            padding: 6px 0;
+            background: #fff;
+            position: relative;
+        }
+
+        .img-right {
+            width: 50px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .customers-info {
+            border-top: 1px solid #d5d5d5;
+        }
+
+        .info-line {
+            display: block;
+            width: 6px;
+            height: 26px;
+            background: #3375e8;
+            float: left;
+            margin-right: 14px;
+        }
+
+        .item-top .mui-pull-right {
+            margin-right: 20px;
+            text-align: right;
+        }
+
+        .money {
+            font-size: 12px;
+            color: #ef413b;
+        }
+
+        .info-name, .customer-tel {
+            font-size: 12px;
+        }
+
+        .customer-name {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 4px 0;
+        }
+
+        .customer-style {
+            font-size: 18px;
+            color: #E2554E;
+            padding: 4px 0;
+        }
+
+        .need-money, .sign-time {
+            font-size: 12px;
+            color: #9f9fa0;
+        }
+
+        .customers-sign {
+            padding: 16px 20px;
+        }
+
+        .customers-info div {
+            padding: 4px 0;
+        }
+
+        .mui-btn-block {
+            margin-top: 14px;
+            padding: 10px;
+        }
+
+        select {
+            padding: 0;
+            margin: 0;
+        }
+
+        .customers-info input {
+            border: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .do-item {
+            padding: 6px 16px;
+            background: #fff;
+            /* border-top:1px solid #D5D5D5; */
+            border-bottom: 1px solid #D5D5D5;
+        }
+
+        #step {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+            #step li {
+                text-align: center;
+            }
+
+        .setp-item-num {
+            padding: 6px 0;
+        }
+
+            .setp-item-num span {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                padding: 4px 7px;
+                border-radius: 50%;
+                border: 1px solid #d5d5d5;
+            }
+
+        .step-line {
+            display: inline-block;
+            width: 7%;
+            height: 2px;
+            background: #666;
+            margin-top: 18px;
+        }
+
+        .step-item.active span {
+            color: #fff;
+            background: #5576AB;
+        }
+
+        .do-info {
+            padding-top: 6px;
+        }
+
+            .do-info div {
+                padding: 4px 0;
+            }
+
+        .complete-item {
+            padding: 6px 16px;
+            background: #fff;
+            /* border-top:1px solid #D5D5D5; */
+            border-bottom: 1px solid #D5D5D5;
+        }
+
+        .handle-bar {
+            margin: 16px 0;
+            width: 100%;
+            display: table;
+            background: #fff;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .table-row {
+            display: table-row;
+        }
+
+        .table-cell {
+            display: table-cell;
+            padding: 4px 0;
+            text-align: center;
+            border: 1px solid #efefef;
+            border-left: 0;
+        }
+
+            .table-cell:last-child {
+                border-right: 0;
+            }
+
+        .handle-bar .mui-icon {
+            font-size: 18px;
+            color: #5576AB;
+        }
+
+        .handle-bar p {
+            font-size: 12px;
+        }
+
+        .customer-needs {
+            text-indent: 16px;
+        }
+
+        /* 改动 */
+        .sign {
+            padding: 0 14px;
+        }
+
+        .condition {
+            padding: 0 14px 10px 14px;
+        }
+
+        .condition-title {
+            font-size: 12px;
+        }
+
+        .condition-content {
+            font-size: 14px;
+            text-indent: 16px;
+            color: #8f8f94;
+            margin-top: 4px;
+        }
+
+        .load-more {
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            color: #878787;
+        }
+
+        .sign div:first-child {
+            font-size: 12px;
+        }
+
+        .sign-info p {
+            font-size: 12px;
+        }
+
+        .newSign {
+            display: none;
+            padding: 10px 14px;
+            background: #fff;
+        }
+
+        .submit-sign {
+            text-align: right;
+        }
+
+        .tip {
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .mui-popover {
+            width: 86%;
+            margin: 0 auto;
+            padding: 12px;
+            text-align: center;
+            position: absolute;
+            right: 1%;
+            background: #fff;
+        }
+
+        #segmentedControl .add-customer .iconfont {
+            color: #e87757;
+        }
+        /* 派单提示 */
+        .none-tip {
+            padding: 36px 15px;
+            text-align: center;
+            background: #FFFFFF;
+        }
+
+        .tip-text {
+            padding: 10px 40px;
+        }
+
+        .none-img {
+            width: 76px;
+            margin: auto;
+        }
+
+            .none-img img {
+                width: 100%;
+            }
+    </style>
+</head>
+<body>
+    <div class="mui-content">
+        <div class="search-bar">
+            <div class="inner-bar">
+                <span class="mui-icon mui-icon-search"></span>
+                <input type="text" class="input-search" placeholder="客户名称">
+            </div>
+        </div>
+        <div class="tab-bar">
+            <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted">
+                <a class="mui-control-item mui-active" href="#my-customers">
+                    <span class="iconfont icon-jiangbei1"></span>
+                    <p>我的客户</p>
+                </a>
+                <a class="mui-control-item" href="#do-customers">
+                    <span class="iconfont icon-gongzuo"></span>
+                    <p>做单中</p>
+                </a>
+                <a class="mui-control-item" href="#complete-customers">
+                    <span class="iconfont icon-yiwancheng1"></span>
+                    <p>已完成</p>
+                </a>
+                <a class="add-customer mui-control-item" href="add-customer.html">
+                    <!-- <span class="iconfont icon-xinzengkehu"></span> -->
+                    <span class="iconfont icon-xinzengkehu1"></span>
+                    <!-- <span class="iconfont icon-xinzengkehu2"></span> -->
+                    <p>新增客户</p>
+                </a>
+            </div>
+        </div>
+        <!-- <div class="roll-news">
+            <div>他人做单</div>
+            <div class="news_list" style="height: 24px;overflow: hidden;flex-grow: 1;max-width:80%;">
+                <ul class="news-info">
+                    <li>用户135****4243&nbsp;抢到周先生房贷一单&nbsp;意向金额100000万</li>
+                    <li>用户158****3223&nbsp;抢到李女士车贷一笔&nbsp;意向金额50000元</li>
+                    <li>马上开发完成，敬请期待</li>
+                </ul>
+            </div>
+        </div> -->
+        <div class="customers-list">
+            <div class="none-tip" id="none-tip" style="display:none;">
+                <div class="none-img"><img src="img/none.png" alt=""></div>
+                <p class="tip-text">暂无客户，您可以点击新增客户到我的客户或参与抢单</p>
+            </div>
+			<div id="myCustomerRefresh" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div id="my_customers">
+						<div id="complete_customers">
+							<div class="complete-item">
+								<div class="do-info">
+									<div class="mui-clearfix">
+										<div class="do-name mui-pull-left">张先生</div>
+										<div class="do-loan-style mui-pull-right">锦易贷100&nbsp;无抵押</div>
+									</div>
+									<div class="mui-clearfix">
+										<div class="mui-pull-left">金额：<span class="do-loan-money">10000元</span></div>
+										<div class="mui-pull-right do-payment-style">先息后本</div>
+									</div>
+									<p class="public-time">2018-10-23&nbsp;11:36</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <footer class="mui-bar mui-bar-tab">
+        <a href="product-list.html" class="mui-tab-item">
+            <span class="mui-icon iconfont icon-shouye1"></span>
+            <span class="mui-tab-label">今日</span>
+        </a>
+        <a class="mui-tab-item" href="grab-case.html">
+            <span class="mui-icon iconfont icon-qiang"></span>
+            <span class="mui-tab-label">抢单</span>
+        </a>
+        <a class="mui-tab-item mui-active" href="work-table.html">
+            <span class="mui-icon iconfont icon-gongzuotai" style="font-size: 26px;"></span>
+            <span class="mui-tab-label">工作台</span>
+        </a>
+        <a class="mui-tab-item" href="my.html">
+            <span class="mui-icon iconfont icon-wo"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </footer>
+    <div class="mui-popover" id="middlePopover">
+        <textarea id='newSign' class="mui-input-clear" placeholder="请填写新的注记..."></textarea>
+        <p class="submit-sign"><button type="button" id="submit-sign" class="mui-btn-blue">提交</button></p>
+    </div>
+    <script src="js/mui.min.js"></script>
+    <script type="text/javascript" src="js/mui.openWindow.js"></script>
+    <script src="js/public.js"></script>
+    <script>
+        //我的客户
+        var myCustomerPageIndex = 1;
+        var myCustomerPageSize = 5;
+        var myCustomerIsOver = false;
+
+        mui.init({
+            pullRefresh: {
+                container: '#myCustomerRefresh',
+                up: {
+                    contentrefresh: '正在为您加载更多...',
+                    contentnomore: '没有更多啦',
+                    callback: myCustomerRefresh
+                },
+            }
+        });
+
+        // 封装id选择器
+        function get(id) {
+            return document.getElementById(id)
+        }
+
+        mui.ready(function () {
+            var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+            if (browserRule.test(navigator.userAgent)) {
+                window.onpageshow = function (event) {
+                    if (event.persisted) {
+                        window.location.reload()
+                    }
+                };
+            }
+            //configValidate();
+        });
+
+        getMyCustomer();
+        function myCustomerRefresh() {
+            setTimeout(function () {
+                mui('#myCustomerRefresh').pullRefresh().endPullupToRefresh((myCustomerIsOver)); //参数为true代表没有更多数据了。
+                if (myCustomerIsOver == false) {
+                    myCustomerPageIndex++;
+                    getMyCustomer();
+                }
+                console.log();
+            }, 500);
+        }
+
+        // 取首屏数据(我的客户)
+        function getMyCustomer() {
+            mui.ajax('action/work.ashx', {
+                data: {
+                    "Judgem": "getMyCustomerList",
+                    "openid": Uid,
+                    "time": Tim
+                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                },
+                dataType: 'text',//服务器返回json格式数据
+                type: 'post',//HTTP请求类型
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    if (jsonData.result == "true") {
+                        var items = "";
+                        var my = jsonData.myCustomer;
+                        for (var i in my) {
+                            var strFlag = "";
+                            var flag = my[i].flag;
+                            if (flag == "1") {
+                                strFlag = "储备";
+                            } else if (flag == "2") {
+                                strFlag = "签约";
+                            } else if (flag == "3") {
+                                strFlag = "意向";
+                            } else if (flag == "4") {
+                                strFlag = "潜在";
+                            } else if (flag == "5") {
+                                strFlag = "淘汰";
+                            }
+                            items += "<div class='customers-item'>";
+                            items += "<div class='item-top mui-clearfix'>";
+                            items += "<div class='info-line'></div>";
+                            items += "<div class='mui-pull-left'>";
+                            items += "<div class='info-name'>客户名称</div>";
+                            items += "<div class='customer-name'>" + my[i].customername + "</div>";
+                            items += "<div class='need-money'>意向金额：" + my[i].amount + "</div>";
+                            items += "</div>";
+                            items += "<div class='mui-pull-right'>";
+                            items += "<div class='customer-tel'>" + my[i].linkphone + "</div>";
+                            items += "<div class='customer-style'>" + strFlag + "</div>";
+                            items += "<div class='sign-time'>" + my[i].create_time + "</div>";
+                            items += "</div>";
+                            items += "<img class='img-right' src='img/share-right.png' >";
+                            items += "</div>";
+                            items += "<div class='handle-bar'>";
+                            items += "<div class='table-row'>";
+                            items += "<div class='table-cell'>";
+                            items += "<a href='tel:' class='telphone'><p class='mui-icon iconfont icon-dianhua'></p><p>联系客户</p></a></div>";
+                            items += "<div class='table-cell'><a href='#middlePopover' data-id='" + my[i].id + "'><p class='mui-icon iconfont icon-msnui-sms-bubble' style='font-size: 20px;'></p><p>添加注记</p></a></div>";
+                            items += "<div class='table-cell'><a href='do-case.html' class='open-apply' data-id='" + my[i].id + "'><p class='mui-icon iconfont icon-qingdan'></p><p>做单申请</p></a></div>";
+                            items += "<div class='table-cell'><a class='del-customer' data-id='" + my[i].id + "'><p class='mui-icon iconfont icon-shanchu1'></p><p>删除客户</p></a></div>";
+                            items += "</div>";
+                            items += "</div>";
+                            items += "<div class='condition'>";
+                            items += "<div class='condition-title'>客户资质：</div><div class='condition-content'>" + my[i].customer_info + "</div></div>";
+                            items += "<div class='sign'>";
+                            items += "<div>最近注记：</div>";
+                            items += "<div class='sign-list'>";
+                            var strRecord = "";
+                            var record = my[i].record;
+                            if (record.length > 0) {
+                                for (var j = 0; j < record.length; j++) {
+                                    strRecord += "<div class='sign-item'>";
+                                    strRecord += "<p class='customer-needs'>" + record[j].context + "</p>";
+                                    strRecord += "<p class='sign-time'>" + record[j].createtime + "</p>";
+                                    strRecord += "</div>";
+                                }
+                            }
+                            items = items + strRecord + "</div></div></div>";
+                        }
+                        get("my_customers").innerHTML = items;
+                    } else if (jsonData.result == "noCustomer") {
+                        get("none-tip").style.display = "";
+                        get("my_customers").innerHTML = "<p class='tip'>你暂时还没有客户</p>";
+                    } else if (jsonData.result == "false") {
+                        mui.toast("获取数据失败");
+                    }
+                },
+                error: function (xhr, type, errorThrown) {
+                    //mui.openWindow({
+                    //    url: '404.html',
+                    //    id: '404'
+                    //})
+                }
+            });
+        }
+        //跳转新增客户
+        mui("#segmentedControl").on("tap", ".add-customer", function () {
+            location.href = "add-customer.html";
+        })
+        // 注记及提交注记
+        var customerId;
+        mui(".handle-bar").on("tap", "#middlePopover", function () {
+            customerId = this.getAttribute("data-id");
+        })
+        document.getElementById("submit-sign").addEventListener("tap", function () {
+            if (document.getElementById("newSign").value != "") {
+                alert(Uid);
+                alert(Tim);
+                alert(SafeCode);
+                alert(customerId); alert(document.getElementById("newSign").value);
+                mui.ajax('action/work.ashx', {
+                    data: {
+                        "Judgem": "addDescription",
+                        "openid": Uid,
+                        "time": Tim,
+                        "customerId": customerId,
+                        "description": document.getElementById("newSign").value
+                    },
+                    beforeSend: function (request) {
+                        request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                    },
+                    dataType: 'text',//服务器返回json格式数据
+                    type: 'post',//HTTP请求类型
+                    success: function (data) {
+                        var jsonData = JSON.parse(data);
+                        if (data.result == "true") {
+                            mui.toast("添加注记成功");
+                            mui(".mui-popover").popover("hide");
+                        }
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        mui.toast("连接服务器失败")
+                        mui.openWindow({
+                            url: '404.html',
+                            id: '404'
+                        })
+                    }
+                });
+            } else {
+                mui.toast("请先填写注记内容！")
+            }
+        })
+        //跳转到做单页
+        mui(".handle-bar").on("tap", ".open-apply", function () {
+            mui.openWindow({
+                url: 'do-case.html',
+                id: 'do-case',
+                extras: {
+                    customerId: this.getAttribute('data-id')
+                },
+
+            })
+        })
+        //删除客户
+        var deleteId;
+        mui(".handle-bar").on("tap", ".del-customer", function () {
+            deleteId = this.getAttribute("data-id");
+            console.log(deleteId)
+            var btnArray = ["否", "是"];
+            mui.confirm("是否要删除该客户？", "确认", btnArray, function (e) {
+                if (e.index == 1) {
+                    mui.ajax('action/User.ashx', {
+                        data: {
+                            Judgem: "deleteCostomer",
+                            Uid: Uid,
+                            Tim: Tim,
+                            deleteId: deleteId
+                        },
+                        beforeSend: function (request) {
+                            request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                        },
+                        dataType: 'json',//服务器返回json格式数据
+                        type: 'post',//HTTP请求类型
+                        timeout: 30000,//超时时间设置为10秒；
+                        success: function (data) {
+                            if (data.result == true) {
+                                mui.toast("成功删除该客户");
+                            } else {
+                                mui.toast("删除失败");
+                            }
+                        },
+                        error: function (xhr, type, errorThrown) {
+                            mui.toast("连接服务器失败")
+                            // 								mui.openWindow({
+                            // 									url: '404.html',
+                            // 									id: '404'
+                            // 								})
+                        }
+                    });
+                } else {
+                    mui.toast("我再考虑考虑");
+                }
+            })
+        })
+
+    </script>
+</body>
+</html>

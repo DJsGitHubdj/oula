@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>推荐汇总</title>
+		<style type="text/css">
+			
+			.header{
+				color: #FFFFFF;
+				text-align: center;
+				background: #FFFFFF;
+				padding-top: 30px;
+				padding-bottom: 36px;
+				background: url(img/1.png);
+				background-size: 100% 100%;
+			}
+			.title{font-size: 24px;margin-bottom: 10px;}
+			.sub-title{font-size: 14px;}
+			.none-tip{padding:20px;text-align: center;}
+			.none-img img{width: 76px;margin: auto;}
+			#send-list{
+				width: 100%;
+				display: table;
+				background: #fff;
+				table-layout: fixed;
+				border-collapse: collapse;
+			}
+			.table-header-group{
+				width:100%;
+				background: #f5f0e8;
+				display:table-header-group; 
+				text-align: center;
+				font-weight: bold;
+			}
+			.table-row-group{display:table-row-group;}
+			.table-row{
+				width:100%;
+				display: table-row;
+				background: ;
+			}
+			.table-cell{
+				width:33.33%;
+				padding:8px 0;
+				font-size: 14px;
+				color: #666;
+				display: table-cell; 
+				text-align: center;
+			}
+			.table-row-group .table-row:nth-child(even){
+				background: #f5f4f4;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="title">推荐汇总</div>
+				<div class="sub-title">我的推荐列表</div>
+			</div>
+			<div id="send-list">
+				<div class="table-header-group">
+					<div class="table-row">
+						<div class="table-cell">业务员</div>
+						<div class="table-cell">进件总数</div>
+						<div class="table-cell">推荐人数</div>
+					</div>
+				</div>
+				<div class="none-tip" id="none-tip" style="display: none;">
+					<div class="none-img"><img src="img/none.png" alt=""></div>
+					<p>当前暂无推荐</p>
+				</div>
+				<div class="table-row-group" id="table-content">
+					<div class="table-row">
+						<div class="table-cell">邓颉</div>
+						<div class="table-cell">300</div>
+						<div class="table-cell">50</div>
+					</div>
+					<div class="table-row">
+						<div class="table-cell">屈万</div>
+						<div class="table-cell">450</div>
+						<div class="table-cell">30</div>
+					</div>
+					<div class="table-row">
+						<div class="table-cell">万涛</div>
+						<div class="table-cell">300</div>
+						<div class="table-cell">23</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script>
+			
+			function get(id){
+				return document.getElementById(id);
+			}
+			
+			function getData(){
+				mui.ajax('action/User.ashx',{
+					data:{
+						Judgem:"userInfo",
+						Uid:Uid,
+						Tim:Tim
+					},
+					beforeSend: function (request) {
+						request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+					},	
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:30000,//超时时间设置为10秒；              
+					success:function(data){
+						if(data.result=="true"){
+							if(data.length<0){
+								get("none-tip").style.display="block";
+							}else{
+								var list_content="";
+								for (var i = 0; i < data.length; i++) {
+									list_content+="<div class='table-row'>";
+									list_content+="<div class='table-cell'>"+data[i].name+"</div>";
+									list_content+="<div class='table-cell'>"+data[i].count+"</div>";
+									list_content+="<div class='table-cell'>"+data[i].commend+"</div>";
+									list_content+="</div>";
+								}
+								get("table-content").innerHTML=list_content;
+							}
+						}else{
+							mui.toast("身份验证错误")
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						mui.openWindow({
+							url:'404.html',
+							id:'404'
+						})
+					}
+				})
+			}
+			mui.ready(function(){
+				
+				
+			})
+		</script>
+	</body>
+</html>

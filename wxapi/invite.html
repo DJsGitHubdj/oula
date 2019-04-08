@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>邀请好友 享收益</title>
+		<style type="text/css">
+			.mui-content{background: #fff;}
+			.mui-content::after{content: "";height: 100px;}
+			.mui-action-back{color: #FFFFFF;font-size: 18px;}
+			.header{
+				background: #fff;
+				padding:28px 22px;
+				color: #FFFFFF;
+				background: url(img/invite-top.png);
+				background-size: 100% 100%;
+				}
+			.invite-list {text-align: right;}
+			.invite-list a{font-size: 12px; color: #FFFFFF;}
+			.header-content{
+				padding-top: 40px;
+				padding-bottom: 16px;
+				text-align: center;
+			}
+			.header span{margin-left: 2px;}
+			.title{font-size: 24px;font-weight: 500;margin-bottom: 10px;} 
+			.container{padding:12px 14px;text-align: center;}
+			.invite-img{padding: 18px 22px;}
+			.container img{width: 100%;}
+			#invite{background: #3375EB;color: #fff;padding:10px;border: 0;}
+			#check{margin-top: 6px; font-size: 12px; border: 0;color: #8f8f94;}
+			#check .mui-icon{font-size: 14px;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="header-content">
+					<div class="title">邀请好友&nbsp;注册成功</div>
+					<div class="title">各享受<span>10元</span>收益</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="invite-img"><img src="img/invite-bg.png" alt="bg"></div>
+				<button type="button" class="mui-btn-block" id="invite">一键邀请</button>
+				<button type="button" id="check">查看细则<span class="mui-icon mui-icon-arrowright"></span></button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init();
+			mui.ready(function(){
+				
+			})
+		</script>
+	</body>
+</html>			

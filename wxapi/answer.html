@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>问答详情</title>
+		<style type="text/css">
+			.mui-content:after{
+				height: 100px;
+			}
+			.answer-item{
+				display: none;
+				padding: 15px;
+				margin-bottom: 5px;
+				background: #FFFFFF;
+			}
+			.title{font-size: 16px;font-weight: 600;padding-bottom: 10px;text-align: center;}
+			.answer-content{font-size: 14px;color: #666666;}
+			.answer-content img{
+				display: block;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div id="answer01" class="answer-item">
+				<div class="title">资金提现周期及说明</div>
+				<div class="answer-content">
+					<img src="img/answer-01.png" alt="">
+					为了保证平台资金与佣金资金的安全性，在提现的过程中，每单佣金会以客户具体成交时间为准，7个工作日内完成佣金的核算、复核及提现。
+				</div>
+			</div>
+			<div id="answer02" class="answer-item">
+				<div class="title">如何成为欧啦联盟的会员</div>
+				<div class="answer-content">
+					<img src="img/answer-02.png" >
+					成为欧啦联盟会员，只需要简单的四步即可。<br>
+					第一步、关注欧啦联盟微信公众号。<br>
+					第二步、点“经济人”，弹出注册框，输入手机号与验证码进入页面。<br>
+					第三步、点击“我的”，点击右上栏“PLUS会员欧啦会员”，弹出“个人信息栏”，填写个人信息。<br>
+					第四步、弹出“购买会员”，点击最右下角“成为会员”。
+				</div>
+			</div>
+			<div id="answer03" class="answer-item">
+				<div class="title">如何开通抢单功能</div>
+				<div class="answer-content">
+					<img src="img/answer-grab.png" alt="">
+					第一步、点击“经济人”进入“个人中心”，点击充值抢单。<br>
+					第二步、选择充值金额。<br>
+					第三步、点击最下方第二栏“抢单”，即可开始抢单。				
+				</div>
+			</div>
+			<div id="answer04" class="answer-item">
+				<div class="title">怎样更换绑定个人资料</div>
+				<div class="answer-content">
+					<img src="img/answe-04.png" alt="">
+					<p style="color: #666666;text-align: center;">个人资料一旦绑定，无法更换。</p>				
+				</div>
+			</div>
+			<div id="answer05" class="answer-item">
+				<div class="title">做单返佣资金安全吗</div>
+				<div class="answer-content">
+					<img src="img/answer-05.png" alt="">
+					做单返佣资金平台会在客户放款后的第一时间进行相应的结算，结算的过程中会有工作人员进行反复的人工审核，可完全保证资金安全性。
+				</div>
+			</div>
+			<div id="answer06" class="answer-item">
+				<div class="title">欧啦联盟产品如何</div>
+				<div class="answer-content">
+					<img src="img/answer-06.jpg" >
+					欧啦联盟产品汇集了市场上主流的房屋抵押贷款、车辆抵押贷款、车辆信用贷款、消费性贷款、小额贷款、经营性贷款、线上极速贷款等贷款品种，是贷款人的一站式贷款产品金融超市。
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.ready(function(){
+				function GetQueryString(name) {
+				    var LocString = String(window.document.location.href);
+				    var rs = new RegExp("(^|)" + name + "=([^&]*)(&|$)", "gi").exec(LocString), tmp;
+				    if (tmp = rs) return tmp[2];
+				    return null;
+				}
+				var answerIndex = decodeURI(GetQueryString("answer"));
+				console.log(answerIndex)
+				var items = document.getElementsByClassName("answer-item");
+				for( var i in items){
+					console.log()
+					if(answerIndex==items[i].getAttribute("id")){
+						items[i].style.display="block";
+					}
+				}
+			})
+			
+			
+		</script>
+	</body>
+	
+</html>

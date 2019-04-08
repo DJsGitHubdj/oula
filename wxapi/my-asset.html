@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+		<title>我的资产</title>
+		<style type="text/css">
+			.mui-content:after{height: 200px; background: #FFFFFF;}
+			.header{position: relative; text-align: center; padding-top: 34px;padding-bottom:22px; font-size: 12px; background:#4376e4 ;color: #b1c8f3;}
+			#my-total{line-height: 30px; padding-top:10px ;padding-bottom: 16px; font-size: 36px;color: #FFFFFF;}
+			#add-count{color: #FFFFFF;margin-left: 4px;}
+			.header a{position: absolute;right: 16px;top: 20px;font-size: 12px;color: #FFFFFF;}
+			.header a .mui-icon{font-size: 12px;}
+			.nav{
+				padding: 10px 0;
+				background: #4e82ef;
+			}
+			.nav a{display: inline-block; width: 49.9%;padding: 8px 0; float: left; text-align: center;font-size: 14px; color: #FFFFFF;}
+			.nav a:first-child{border-right: 1px solid #80a7f3;}
+			.nav .a_active{font-weight: bold;}
+			.my-list{background: #FFFFFF;}
+			.none-tip{padding:36px 0;text-align: center;}
+			.none-img{width: 76px;margin: auto;}
+			.none-img img{width: 100%;}
+			.list-item{
+				padding: 12px 14px;
+				display: flex;
+				background: #FFFFFF;
+				justify-content: space-between;
+				-webkit-justify-content: space-between;
+				align-items: center;
+				-webkit-align-items: center;
+				border-bottom: 1px solid #E5E5E5;
+			}
+			.deal-style{font-size: 14px;}
+			.deal-time{font-size: 12px;color: #AAAAAA;}
+			.deal-money{font-size: 14px;font-weight: 600;text-align: right;}
+			.deal-money.income {color: #e87757 ;}   
+			/* 下拉容器定位 */
+			.mui-scroll-wrapper {
+				top: 210px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div>我的欧啦币</div>
+				<div id="my-total">0.00</div>
+				<div>我的工资(元)<span id="add-count">+0.00</span></div>
+				<a href="" id="apply-take-money">申请提现 <span class="mui-icon mui-icon-arrowright"></span></a>
+			</div>
+			<div class="nav mui-clearfix" id="nav">
+				<a class="my-deal a_active" id="my-deal">交易明细</a>
+				<a class="my-deal" id="my-income">收益明细</a>
+			</div>
+			<div class="my-list" id="my-list">
+				<div class="none-tip" id="none-tip">
+					<div class="none-img"><img src="img/none.png" alt=""></div>
+					<p>你当前暂无资产，成为会员或报单得收益</p>
+				</div>
+				<div id="pullrefresh" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="list-item">
+							<div class="deal-style">在线支付</div>
+							<div>
+								<div class="deal-time">2018-11-22</div>
+								<div class="deal-money income">-450.00</div>
+							</div>
+						</div>
+						<div class="list-item">
+							<div class="deal-style">在线支付</div>
+							<div class="">
+								<div class="deal-time">2018-11-22</div>
+								<div class="deal-money">-450.00</div>
+							</div>
+						</div>
+						<div class="list-item">
+							<div class="deal-style">在线支付</div>
+							<div class="">
+								<div class="deal-time">2018-11-22</div>
+								<div class="deal-money">-450.00</div>
+							</div>
+						</div>
+						<div class="list-item">
+							<div class="deal-style">在线支付</div>
+							<div class="">
+								<div class="deal-time">2018-11-22</div>
+								<div class="deal-money">-450.00</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: '正在为您加载更多...',
+						contentnomore: '没有更多啦',
+						callback: pullupRefresh
+					},
+				}
+			});
+			// 封装id选择器
+			function get(id){
+				return document.getElementById(id)
+			}
+			// 测试用，要删除
+			// get("none-tip").style.display="none";
+			var isOver = false;
+			var pageIndex = 1;
+			var pageSize = 1;
+			var my_type="1";
+			// 切换栏
+			mui(".nav").on("tap","a",function(){
+				var nav_nodes=document.getElementsByClassName("my-deal");
+				for(var i in nav_nodes){
+					nav_nodes[i].className="my-deal";
+				}
+				this.classList.add("a_active");
+				my_type=this.getAttribute("id");
+				get("my-list").innerHTML = "";//切换时先清空当前类型
+				isOver = false;
+				pageIndex = 1;
+				my_type=this.getAttribute("id");
+				// getData();
+			});
+			function pullupRefresh() {
+				setTimeout(function () {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((isOver)); //参数为true代表没有更多数据了。
+					if (isOver == false) {
+						pageIndex++;
+						// getData();
+					}
+				}, 500);
+			}
+			// getData()
+			function getData(){
+				mui.ajax('action/User.ashx',{
+					data:{
+						Judgem:"userInfo",
+						Uid:Uid,
+						Tim:Tim,
+						type:my_type,
+						pageIndex: pageIndex
+					},
+					beforeSend: function (request) {
+						request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+					},	
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:30000,//超时时间设置为10秒；              
+					success:function(data){
+						if(data.result=="true"){
+							if(data.length>0){
+								get("none-tip").style.display="none";
+								var page_content=document.createElement("div");
+								var list_item="";
+								for (var i = 0; i < data.length; i++) {
+									list_item+='<div class="list-item">'+'<div class="deal-style">在线支付</div>'+'<div>'+'<div class="deal-time">'+data[i].time+'</div>'+'<div class="deal-money">'+data[i].dealMoney+'</div>'+'</div>'+'</div>'
+								}
+								page_content.innerHTML=list_item;
+								get("my-list").appendChild(page_content);
+							}
+						}else{
+							mui.toast("身份验证错误")
+						}
+					},
+					error:function(xhr,type,errorThrown){
+						mui.openWindow({
+							url:'404.html',
+							id:'404'
+						})
+					}
+				})
+			}
+			mui.ready(function(){
+				get("apply-take-money").addEventListener("tap",function(){
+					location.href="bindingBankCard.html";
+				})
+			})
+		</script>
+	</body>
+</html>

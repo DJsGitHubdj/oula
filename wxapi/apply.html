@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>立即申请</title>
+		<style type="text/css">
+			input::-webkit-input-placeholder { font-size: 14px;}
+			.mui-content select{font-size: 14px;}
+			.header{
+				text-align: center;
+				padding:38px 20px;
+				padding-bottom: 14px;
+				color: #FFFFFF;
+				background: url(img/3.png);
+				background-size: 100% 100%;
+			}
+			.header .title{font-size: 24px;margin-bottom: 10px;}
+			.header p{font-size: 12px; color: #9fbff9;}
+			.mui-input-group{margin:15px;background: none;}
+			.mui-input-group:before,.mui-input-group:after {height: 0;}
+			.mui-input-row:last-child:after{height: 0;}
+			.mui-input-group .mui-input-row{height: 60px;}
+			.mui-input-row label{padding:21px 15px;}
+			.mui-input-group label{font-size: 14px; color:#666;}
+			.mui-input-group input{
+				border: 0;
+				margin-bottom: 0;
+				padding-left: 0;
+			}
+			.input-row input::-webkit-input-placeholder {color: #AAAAAA;}
+			.top{
+				padding:15px;
+				height: 104px;
+				background: #fff;
+				border-radius: 8px;
+			}
+			.top input{margin-top: 8px;color: #333;}
+			.send-info{
+				padding-top:4px ;
+				background: #fff;
+				border-radius: 8px;
+				margin-top:14px;
+			}
+			.send-info input,.send-info select{height: 57px;}
+			.send-info .mui-select:before{top:18px;right: 15px;font-size: 20px;}
+			#go-more{display: block; padding: 15px; color: #0062CC;font-size: 12px;}
+			.submit{padding:0 15px;}
+			#submit{margin-top: 15px;padding: 10px; color: #fff;background: #0062CC; border: 0;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="title">立即申请</div>
+				<p>大平台有保障&nbsp;银行审批放款</p>
+			</div>
+			<form class="mui-input-group">
+				<div class="top">
+					<label>客户姓名</label>
+					<p>
+						<input type="text" class="mui-input-clear" maxlength="4" id="case-name" placeholder="请输入客户全称">
+					</p>
+				</div>
+				<div class="send-info">
+					<div class="mui-input-row mui-select">
+						<label>客户称呼</label>
+						<select id="case-sex">
+							<option value="man">先生</option>
+							<option value="woman">女士</option>
+						</select>
+					</div>
+					<div class="mui-input-row">
+						<label>联系电话</label>
+						<input type="tel" class="mui-input-clear" maxlength="11" id="case-tel" placeholder="请输入客户的手机号码">
+					</div>
+					<div class="mui-input-row mui-select">
+						<label>贷款产品</label>
+						<select id="case-style">
+							<option value="房抵贷">房产抵押贷</option>
+							<option value="车抵">汽车抵押贷</option>
+							<option value="上班">社保公积金贷</option>
+							<option value="保单贷">保单贷</option>
+							<option value="未知">其他</option>
+						</select>
+					</div>
+					<div class="mui-input-row">
+						<label>资金需求</label>
+						<input type="number" class="mui-input-clear" maxlength="9" id="need-money" placeholder="单位:元">
+					</div>
+					<div id="go-more">完善更多信息(选填)</div>
+					<div class="more-info">
+						<div class="mui-input-row mui-select">
+							<label>工作情况</label>
+							<select id="case-work">
+								<option value="上班">上班族</option>
+								<option value="老板">公司法人</option>
+								<option value="个体">个体老板</option>
+								<option value="无业">自由职业</option>
+								<option value="未知">我也不清楚</option>
+							</select>
+						</div>
+						<div class="mui-input-row mui-select">
+							<label>所在城市</label>
+							<select id="case-city">
+								<option value="成都">成都市</option>
+								<option value="绵阳">绵阳</option>
+								<option value="重庆">重庆</option>
+								<option value="简阳">简阳</option>
+								<option value="未知">其他</option>
+							</select>
+						</div>
+						<div class="mui-input-row" style="height: auto;">
+							<label>你的需求</label>
+							<div>
+								<textarea id="case-sign" placeholder="详细的资质情况将有利于更快的匹配产品和服务..."></textarea> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="submit">
+				<button type="button" class="mui-btn-block" id="submit">立即申请</button>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script type="text/javascript">
+			mui.ready(function(){
+				function get(id){
+					return document.getElementById(id)
+				}
+				get("case-name").focus();
+				// 完善更多信息开关
+				var moreBtn= get("go-more");
+				var moreInfo=document.getElementsByClassName("more-info")[0];
+				moreInfo.style.display="none"
+				moreBtn.addEventListener("tap",function(){
+					if(moreInfo.style.display=="none"){
+						moreInfo.style.display="block";
+					}else{
+						moreInfo.style.display="none";
+					}
+				})
+				// 加载产品列表
+				var data=[
+					{
+						name:"中信银行二抵",
+						value:"001"
+					},
+					{
+						name:"交通银行工薪贷",
+						value:"002"
+					},
+					{
+						name:"招商银行车抵贷",
+						value:"003"
+					}
+				];
+				var customerSelect="<option value='成都'>成都市</option>";
+				var selectOptions="";
+				for(var i in data){
+					selectOptions+="<option value='"+data[i].value+"'>"+data[i].name+"</option>"
+				}
+				get("case-style").innerHTML=selectOptions;
+				function getOptions(){
+					mui.ajax('url',{
+						data:{
+							
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							if(data.result==true){
+								var selectOptions="";
+								for(var i in data){
+									selectOptions+="<option value='"+data[i].value+"'>"+data[i].name+"</option>"
+								}
+								get("case-style").innerHTML=selectOptions;
+							}else{
+								mui.toast("身份验证错误")
+							}
+							
+						},
+						error:function(xhr,type,errorThrown){
+							
+						}
+					});
+				}
+				// 立即申请
+				get("submit").addEventListener("tap",function(){
+					var caseName=get("case-name");
+					var caseSex=get("case-sex");
+					var sex=caseSex.options[caseSex.selectedIndex].value;
+					var caseTel=get("case-tel");
+					var needMoney=get("need-money");
+					var caseCity=get("case-city");
+					var city=caseCity.options[caseCity.selectedIndex].value;
+					var caseWork=get("case-work");
+					var workIndex = caseWork.selectedIndex; // 选中索引
+					var work = caseWork.options[workIndex].value; // 选中值
+					var caseStyle=get("case-style");
+					var style=caseStyle.options[caseStyle.selectedIndex].value;
+					var caseSign=get("case-sign");
+					var regTel=/^1[345789]\d{9}$/;
+					var regName=/^[\u4e00-\u9fa5]{1,4}$/;
+					if(!regName.test(caseName.value)){
+						mui.toast("请先输入中文客户姓名")
+						return false;
+					}
+					if(!regTel.test(caseTel.value)){
+						mui.toast("请输入正确的手机号码")
+						return false;
+					}
+					else{
+// 						var data={
+// 									name:caseName.value,
+// 									sex:sex,
+// 									telphone:caseTel.value,
+// 									city:city,
+// 									needMoney:needMoney.value,
+// 									work:work,
+// 									loanStyle:style,
+// 									sign:caseSign.value,
+// 									time:new Date().getTime()
+// 								}
+// 						console.log(data)
+						
+						mui.ajax('add-case-url',{
+							mui(get("submit")).button('loading');
+							data:{
+								Judgem: "sendCase",
+								Uid: Uid,
+								Tim: Tim,
+								name:caseName.value,
+								sex:sex,
+								telphone:caseTel.value,
+								city:city,
+								needMoney:needMoney.value,
+								work:work,
+								loanStyle:style,
+								sign:caseSign.value,
+								time:new Date().getTime()
+							},
+							beforeSend: function (request) {
+								request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+							},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							success:function(data){
+								mui.toast("新增客户成功！")
+								mui(get("submit")).button('reset');
+								setTimeout(function(){
+									location.href="work-table.html";
+								},2000)
+								
+							},
+							error:function(xhr,type,errorThrown){
+								
+							}
+						})
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

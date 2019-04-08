@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/public.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jQueryRotate.js"></script>
+    <title>充值抢单</title>
+    <style type="text/css">
+        .mui-content {
+            position: relative;
+        }
+		.mui-content:after {
+			height: 400px;
+			background: #FFFFFF;
+		}
+        .header {
+            padding: 40px 23px;
+            padding-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            background: url(img/grab-top.png);
+            background-size: 100% 100%;
+            color: #c8eeff;
+        }
+        #header-title {
+            line-height: 36px;
+            font-size: 36px;
+            padding-bottom: 8px;
+            color: #FFFFFF;
+        }
+        .nav {
+            padding-top: 16px;
+        }
+        .nav-item {
+            float: left;
+            width: 33.3%;
+            text-align: center;
+            padding: 8px 0;
+            border-top: 1px solid #54afff;
+        }
+		.nav-item .iconfont {
+			vertical-align: middle;
+			margin-right: 2px;
+		}
+        .customers-list {
+            position: absolute;
+            top: 152px;
+            left: 23px;
+            right: 23px;
+            padding: 20px 18px;
+            margin-bottom: 80px;
+            background: #FFFFFF;
+            border-radius: 6px;
+            box-shadow: 2px 4px 6px #B9C1C7;
+            -webkit-box-shadow: 2px 4px 6px #B9C1C7;
+        }
+
+        .none-info {
+            text-align: right;
+            color: #aab1b7;
+        }
+
+		.none-info .mui-icon {
+			font-size: 20px;
+		}
+
+        .none-content {
+            padding: 16px 36px;
+        }
+
+        .none-circle {
+        }
+
+            .none-circle img {
+                width: 100%;
+            }
+
+        .none-title {
+            padding-top: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #4779b6;
+        }
+
+        #go-recharge {
+            width: 100%;
+            margin: 26px 0;
+            padding: 12px 0;
+            background: #97bbf5;
+            color: #FFFFFF;
+            background: #3375eb;
+            border: 0;
+        }
+
+        .customers-title {
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4376e4;
+            background: #fff;
+        }
+
+		.customers-title span {
+			margin-right: 5px;
+			font-weight: normal;
+		}
+
+        .customers-item {
+            background: #fff;
+            padding-top: 6px;
+        }
+
+		.customers-item .button-div {
+			margin-right: 20px;
+			margin-top: 6px;
+		}
+
+        #grab {
+            color: #fff;
+            font-size: 24px;
+            padding: 0;
+            background: #3375e8;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 0;
+        }
+
+        .info-line {
+            display: block;
+            width: 6px;
+            height: 26px;
+            background: #3375e8;
+            float: left;
+            margin-right: 14px;
+        }
+
+        .money {
+            font-size: 16px;
+            font-weight: 600;
+            color: #E2554E;
+        }
+
+        .customers-name {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 2px 0;
+        }
+
+        .need-money {
+            font-size: 12px;
+            color: #9f9fa0;
+        }
+
+        .customers-sign,.customers-conditions{padding: 12px 20px;}
+		.customers-sign{padding-top: 0;}
+
+        .title {
+            font-size: 12px;
+        }
+
+        .sign-content {
+            font-size: 14px;
+            margin: 4px 0;
+            color: #858687;
+        }
+
+        .sign-time {
+            font-size: 12px;
+            color: #858687;
+        }
+
+        .sign-info .more {
+            font-size: 12px;
+            color: #858687;
+        }
+
+        .sign-info p {
+            font-size: 16px;
+            color: #E2554E;
+        }
+
+        .customer-tip {
+            padding: 30px 0;
+            text-align: center;
+            background: #FFFFFF;
+        }
+		/* 派单提示 */
+		.none-tip1{padding:36px 0;text-align: center;}
+		.none-img{width: 76px;margin: auto;}
+		.none-img img{width: 100%;}
+    </style>
+</head>
+<body>
+    <div class="mui-content">
+        <div class="header">
+            <div id="header-title">抢单专区</div>
+            <div>根据你的会等级和资产水平抢单</div>
+            <div class="nav mui-clearfix">
+                <div class="nav-item" style="text-align: left;">
+                    <span class="iconfont icon-libao"></span>
+                    <span>享高收益</span>
+                </div>
+                <div class="nav-item">
+                    <span class="iconfont icon-kuaisu"></span>
+                    <span>快速抢单</span>
+                </div>
+                <div class="nav-item" style="text-align: right;">
+                    <span class="iconfont icon-yinhangqia"></span>
+                    <span>便捷提现</span>
+                </div>
+            </div>
+        </div>
+        <div class="customers-list">
+            <div class="none-tip" id="none-tip">
+                <div class="none-info">
+                    <span class="mui-icon mui-icon-info"></span>
+                </div>
+                <div class="none-content">
+                    <div class="none-circle">
+                        <img src="img/grab-none.png" alt="none">
+                    </div>
+                    <div class="none-title">做单成功获高额返利</div>
+                    <button type="button" id="go-recharge">我要充值</button>
+                </div>
+            </div>
+			<div class="none-tip1" id="none-tip1" style="display:none">
+				<div class="none-img"><img src="img/none.png" alt=""></div>
+				<p>正在为您派单</p>
+			</div>
+            <div class="new-customers" id="d_customer">
+                <div class="customers-title">
+                    <span class="iconfont icon-jiangbei1"></span>新客户
+                </div>
+                <div class="customers-item">
+                    <div class="item-top mui-clearfix">
+                        <div class="info-line"></div>
+                        <div class=" mui-pull-left">
+                            <div class="money" id="d_price"></div>
+                            <div class="customers-name" id="d_customername"></div>
+                            <div class="need-money" id="d_money"></div>
+							<div class="need-money" id="d_source">来源：地铁广告</div>
+                        </div>
+                        <div class="button-div mui-pull-right" style="position: relative;">
+                            <button type="button" id="grab">抢</button>                            
+                        </div>
+                    </div>
+					<div class="customers-conditions">
+						<div class="title">资质条件</div>
+						<div class="sign-content">
+							客户农村户口，名下拥有自建房一套600㎡。
+						</div>
+					</div>
+                    <div class="customers-sign">
+                        <div class="title">备注</div>
+                        <div id="d_record" class="sign-content">是是是是是是是是是是是是是是是是是是</div>
+                        <div class="sign-info mui-clearfix">
+                            <p class="mui-pull-right"><span id="end-time">120s</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init();
+			mui.ready(function(){
+			// 封装id选择器
+				function get(id){
+					return document.getElementById(id)
+				}
+				
+				// getData()
+				function getData(){
+					mui.ajax('action/User.ashx',{
+						data:{
+							Judgem:"userInfo",
+							Uid:Uid,
+							Tim:Tim
+						},
+						beforeSend: function (request) {
+							request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+						},	
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:30000,//超时时间设置为10秒；              
+						success:function(data){
+							if(data.result=="true"){
+								if (data.grade == "1") {
+									get("my-grade").src = "img/vip01.png";
+								}else {
+									get("my-grade").src = "img/vip01.png";
+									document.getElementsByClassName("my-card")[0].classList.add("vip-card");
+								}
+								if(data.carNumber!=""){
+									get("card-number").innerText=data.carNumber;
+								}
+								if(data.name!=""){
+									get("my-name").value=data.name.substring(0,1)+"*";
+								}
+								if(data.idNumber!=""){
+									get("id-number").value=data.idNumber.substring(0,1)+"***************"+data.idNumber.substring(17,18);
+								}
+								if(data.linkphone!=""){
+									get("my-tel").value=data.linkphone.substring(0,3)+"******"+data.linkphone.substring(9,11)
+								}
+							}else{
+								mui.toast("身份验证错误")
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							mui.openWindow({
+								url:'404.html',
+								id:'404'
+							})
+						}
+					})
+				}
+				
+			})
+		</script>
+	</body>
+</html>

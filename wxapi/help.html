@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>帮助中心</title>
+		<style type="text/css">
+			.mui-content::after{content: "";height: 46px;}
+			.question-list:after{
+				height: 0;
+			}
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			.mui-table-view-cell{
+				padding: 13px 15px;
+			}
+			.mui-table-view-cell:after{
+				left: 0;
+				background: #efefef;
+			}
+			.tab-list {
+				width: 100%;
+				display: table;
+				background: #fff;
+				table-layout: fixed;
+				border-collapse: collapse;
+				margin-bottom: 6px;
+			}
+			.table-row {
+				display: table-row;
+			}
+			.table-row .table-cell:last-child{
+				border-right: 0;
+			}
+			.table-cell {
+				display: table-cell;
+				width: 49.9%;
+				padding: 20px 0;
+				text-align: center;
+				border: 1px solid #efefef;
+				border-left: 0;
+			}
+			.table-cell p{margin: 0;color: #a2a2a2;}
+			.cell-img{padding: 12px 0;}
+			.table-row .iconfont{font-size: 28px;}
+			.footer{
+				position: fixed;
+				z-index: 10;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			#contact-us{padding: 12px;text-align: center; color: #3a7db6; background-color: #FFFFFF; font-size: 16px;}
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<ul class="question-list mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="answer.html?answer=answer01">
+						资金提现周期及说明
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="answer.html?answer=answer02">
+						如何成为欧啦联盟会员
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="answer.html?answer=answer03">
+						如何开通抢单功能
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="answer.html?answer=answer04">
+						怎样更换绑定个人资料？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="answer.html?answer=answer05">
+						做单返佣资金安全吗？
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="answer.html?answer=answer06">
+						欧啦联盟产品如何？
+					</a>
+				</li>
+			</ul>
+			<div class="tab-list">
+				<div class="table-row">
+					<a class="table-cell href="">
+						<div class="cell-img">
+							<span class="iconfont icon-gongzuo1" style="color:#71bf6e;"></span>
+						</div>
+						<p>基本介绍</p>
+					</a>
+					<a class="table-cell href="">
+						<div class="cell-img">
+							<span class="iconfont icon-xinyong1" style="color: #f2af3d;";"></span>
+						</div>
+						<p>安全问题</p>
+					</a>
+					<a class="table-cell href="">
+						<div class="cell-img">
+							<span class="iconfont icon-yinhangqia1" style="color:#71bf6e;"></span>
+						</div>
+						<p>买入问题</p>
+					</a>
+				</div>
+				<div class="table-row">
+					<a class="table-cell href="">
+						<div class="cell-img">
+							<span class="iconfont icon-zhuanyi" style="color: #ee8584;"></span>
+						</div>
+						<p>取出问题</p>
+					</a>
+					<a class="table-cell href="">
+						<div class="cell-img">
+							<span class="iconfont icon-weibiaoti1" style="color: #f2af3d;"></span>
+						</div>
+						<p>收益问题</p>
+					</a>
+					<a class="table-cell href="">
+						<div class="cell-img">
+							<span class="iconfont icon-jinrongfuwu" style="color: #f2af3d;"></span>
+						</div>
+						<p>工资理财</p>
+					</a>
+				</div>
+			</div>
+			<a href="#" class="mui-btn-block" id="contact-us">联系客服</a>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init();
+			mui.ready(function(){
+				
+			})
+		</script>
+	</body>
+</html>			

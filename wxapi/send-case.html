@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>报单提佣</title>
+		<style type="text/css">
+			.mui-content::after{content: "";height: 40px;}
+			input::-webkit-input-placeholder { font-size: 14px;}
+			.mui-input-row select {font-size: 14px;}
+			.send-case{position: relative; padding: 14px 0; background: #3f74eb;}
+			.send-logo{width: 60px;height: 60px;margin:auto;background-image: -webkit-linear-gradient(top, #fff 60%, #a8c4f6); border-radius: 30px;}
+			.send-logo .icon-16{display: inline-block;font-size: 30px;color: #4279ec; margin: 20px 16px;}
+			.title{text-align: center;font-weight: 500;margin: 6px 0;color: #fff;}
+			.title-btn {color: #FFFFFF;font-size: 12px;padding: 1px 6px;border: 1px solid #fff;margin-left: 8px;}
+			.mui-input-group{margin:15px;background: none;}
+			.mui-input-group:before,.mui-input-group:after {height: 0;}
+			.mui-input-row:last-child:after{height: 0;}
+			.mui-input-group .mui-input-row{height: 60px;}
+			.mui-input-row label{padding:21px 15px;}
+			.mui-input-group label{font-size: 14px; color:#666;}
+			.mui-input-group input{
+				border: 0;
+				margin-bottom: 0;
+				padding-left: 0;
+			}
+			.input-row input::-webkit-input-placeholder {color: #AAAAAA;}
+			.top{
+				padding:15px;
+				height: 104px;
+				background: #fff;
+				border-radius: 8px;
+			}
+			.top input{margin-top: 8px;color: #333;}
+			.send-info{
+				padding-top:4px ;
+				background: #fff;
+				border-radius: 8px;
+				margin-top:14px;
+			}
+			.send-info input,.send-info select{height: 57px;}
+			.send-info .mui-select:before{top:18px;right: 15px;font-size: 20px;}
+			#go-more{display: block; padding: 15px; color: #0062CC;font-size: 12px;}
+			/* .more-info{display: none;} */
+			.tip{padding: 15px;font-size: 14px; color: #666;}
+			.tip a{color: #5b6a91;}
+			#submit{margin-top: 15px;padding: 10px; color: #fff;background: #0062CC; border: 0;}
+			#check{vertical-align: middle;}
+			/* 弹出层 */
+			.mui-popover {
+				width: 80%;
+				padding: 8%;
+				position: absolute;
+				left:10%;
+				right: 10%;
+				top: 14%;
+				background-image: -webkit-linear-gradient(top, #3d85f3 40%, #1d43bc);
+			}
+			.popover-title{text-align:center;color: #FFFFFF;font-size: 24px;margin-top: 30px;}
+			.popover-content{margin: 16px auto;margin-top: 24px; background: #FFFFFF;border-radius: 4px;-webkit-box-shadow:2px 2px 5px #1738a5;}
+			.sub-title{padding: 14px 0; text-align: center;color: #326ee0;background: #abcffa;border-top-right-radius: 4px;border-top-left-radius: 4px;}
+			.sub-content {padding: 20px 0;text-align: center;}
+			.sub-content button{font-size: 12px; color: #3672e0;border-radius: 10px;padding:0 8px;height: 21px;line-height: 21px;}
+			.popover-bottom{padding: 0 6px;}
+			.popover-bottom .mui-btn-block{
+				padding: 8px 0;
+				color: #FFFFFF;
+				background: #3878e7;
+				border: 0;
+				border-radius:20px;
+				box-shadow:2px 2px 5px #1738a5;
+				-webkit-box-shadow:2px 2px 5px #1738a5;
+			}
+			.sub-img{padding-top:30px ;padding-bottom: 0; margin-left: 30%;}
+			.sub-img span{margin-left: 4px; font-size: 20px;color: #0062CC;}
+			#add-money{font-size: 36px;}
+			#goback{position: absolute; top:-38px;left: 0px;color: #FFFFFF;}
+			#goback span{font-size: 30px;}
+			/* 弹出层透明度调节 */
+			/* .mui-backdrop {background-color: rgba(0, 0, 0, 0.7);} */
+			#send-list{position: absolute;right: 16px;top: 20px;font-size: 12px;color: #FFFFFF;}
+			#send-list .mui-icon{font-size: 12px;}
+			/* 提交成功后弹窗*/
+			#success-popover{background: #FFFFFF;padding:4% 0;}
+			#success-popover .popover-title{color: #333333;}
+			.popover-tip{font-size: 12px;margin: 20px 0;color: #858687;text-align: center;}
+			.popover-img img{width: 100%;}
+			#success-popover .popover-bottom{padding: 0; margin-top:10px;text-align: center;}
+			#success-popover button{padding:0;font-size: 12px;color: #666666;border: 0;}
+		/* H5实现安卓机长按弹出菜单保存功能，注：只能放在CSS最后
+		*/
+		-webkit-touch-callout:default;
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="send-case">
+				<div class="send-logo">
+					<span class="iconfont icon-16"></span>
+				</div>
+				<div class="title">均单&nbsp;49元/元&nbsp;返利</div>
+				<p class="title">报单成功&nbsp;享收益&nbsp;领福利<a href="" class="title-btn">详情</a></p>
+				<a id="send-list">我的报单 <span class="mui-icon mui-icon-arrowright"></span></a>
+			</div>
+			<form class="mui-input-group">
+				<div class="top">
+					<label>客户姓名</label>
+					<p>
+						<input type="text" class="mui-input-clear" maxlength="4" id="case-name" placeholder="请输入客户全称">
+					</p>
+				</div>
+				<div class="send-info">
+					<div class="mui-input-row mui-select">
+						<label>客户称呼</label>
+						<select id="case-sex">
+							<option value="man">先生</option>
+							<option value="woman">女士</option>
+						</select>
+					</div>
+					<div class="mui-input-row">
+						<label>联系电话</label>
+						<input type="tel" class="mui-input-clear" maxlength="11" id="case-tel" placeholder="请输入客户的手机号码">
+					</div>
+					<div class="mui-input-row mui-select">
+						<label>所在城市</label>
+						<select id="case-city">
+							<option value="成都">成都市</option>
+							<option value="绵阳">绵阳</option>
+							<option value="重庆">重庆</option>
+							<option value="简阳">简阳</option>
+							<option value="未知">其他</option>
+						</select>
+					</div>
+					<div class="mui-input-row">
+						<label>资金需求</label>
+						<input type="text" class="mui-input-clear" id="need-money" placeholder="单位:元">
+					</div>
+					<div id="go-more">完善更多信息</div>
+					<div class="more-info">
+						<div class="mui-input-row mui-select">
+							<label>工作情况</label>
+							<select id="case-work">
+								<option value="上班">上班族</option>
+								<option value="老板">公司法人</option>
+								<option value="个体">个体老板</option>
+								<option value="无业">自由职业</option>
+								<option value="未知">我也不清楚</option>
+							</select>
+						</div>
+						<div class="mui-input-row mui-select">
+							<label>贷款类型</label>
+							<select id="case-style">
+								<option value="房抵贷">房产抵押贷</option>
+								<option value="车抵">汽车抵押贷</option>
+								<option value="上班">社保公积金贷</option>
+								<option value="保单贷">保单贷</option>
+								<option value="未知">其他</option>
+							</select>
+						</div>
+						<div class="mui-input-row" style="height: auto;">
+							<label>客户注记</label>
+							<div>
+								<textarea id="case-sign" placeholder="详细的客户资质情况..."></textarea> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="tip">
+				<input type="checkbox" id="check">
+				<span>同意<a id="contractWarning">服务协议及风险提示</a></span>
+				<button type="button" class="mui-btn-block" id="submit">报单</button>
+			</div>
+		</div>
+		<!-- 弹出层 -->
+		<div id="popover" class="mui-popover">
+			<div class="popover-title">均单&nbsp;49元&nbsp;不限额返利</div>
+			<div class="popover-content">
+				<div class="sub-title">报单福利</div>
+				<div class="sub-img mui-clearfix">
+					<span id="add-money">+49</span><span>元</span>
+				</div>
+				<div class="sub-content">
+					
+				</div>
+			</div>
+			<div class="popover-bottom">
+				<button type="button" class="mui-btn-block" id="go-send">立即报单</button>
+			</div>
+			<div id="goback"><span class="mui-icon mui-icon-close"></span></div>
+		</div>
+		<!-- 成功弹窗 -->
+		<div id="success-popover" class="mui-popover">
+			<div class="popover-title">报单成功</div>
+			<div class="popover-tip">该客户审核成功后将会发放49元返佣。</div>
+			<div class="popover-img">
+				<img src="img/send-success.png" >
+			</div>
+			<div class="popover-bottom">
+				<button type="button" id="close" class="mui-btn">关闭</button>
+			</div>
+		</div>
+		<footer class="mui-bar mui-bar-tab">
+			<a href="product-list.html" class="mui-tab-item">
+				<span class="mui-icon iconfont icon-shouye1"></span>
+				<span class="mui-tab-label">今日</span>
+			</a>
+			<a class="mui-tab-item" href="grab-case.html">
+				<span class="mui-icon iconfont icon-qiang"></span>
+				<span class="mui-tab-label">抢单</span>
+			</a>
+			<a class="mui-tab-item" href="work-table.html">
+				<span class="mui-icon iconfont icon-gongzuotai" style="font-size: 26px;"></span>
+				<span class="mui-tab-label">工作台</span>
+			</a>
+			<a class="mui-tab-item mui-active" href="my.html">
+				<span class="mui-icon iconfont icon-wo"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</footer>
+		<script src="js/mui.min.js"></script> 
+		<script src="js/public.js"></script>
+		<script>
+			mui.init();
+			mui.ready(function(){
+				window.addEventListener('scroll', function(){
+					console.log(this.pageYOffset)
+				});
+				// mui("#popover").popover("show");
+				document.getElementById("goback").addEventListener("tap",function(){
+					mui("#popover").popover("hide");
+				})
+				document.getElementById("close").addEventListener("tap",function(){
+					mui("#success-popover").popover("hide");
+				})
+				document.getElementById("go-send").addEventListener("tap",function(){
+					mui("#popover").popover("hide");
+				})
+				//跳转我的报单列表
+				document.getElementById("send-list").addEventListener("tap",function(){
+					location.href="mySendList.html";
+				})
+				// 完善更多信息开关
+				var moreBtn= document.getElementById("go-more");
+				var moreInfo=document.getElementsByClassName("more-info")[0];
+				moreInfo.style.display="none"
+				moreBtn.addEventListener("tap",function(){
+					if(moreInfo.style.display=="none"){
+						moreInfo.style.display="block";
+					}else{
+						moreInfo.style.display="none";
+					}
+				})
+				// 跳转至服务协议
+				document.getElementById("contractWarning").addEventListener("tap",function(){
+					location.href="contractWarning.html";
+				})
+				// 点击报单
+				document.getElementById("submit").addEventListener("tap",function(){
+					var inputs= document.getElementsByTagName("input");
+					var selects=document.getElementsByTagName("select");
+					var caseName=document.getElementById("case-name");
+					var caseSex=document.getElementById("case-sex");
+					var sex=caseSex.options[caseSex.selectedIndex].value;
+					var caseTel=document.getElementById("case-tel");
+					var needMoney=document.getElementById("need-money");
+					var caseCity=document.getElementById("case-city");
+					var city=caseCity.options[caseCity.selectedIndex].value;
+					var caseWork=document.getElementById("case-work");
+					var workIndex = caseWork.selectedIndex; // 选中索引
+					var work = caseWork.options[workIndex].value; // 选中值
+					var caseStyle=document.getElementById("case-style");
+					var style=caseStyle.options[caseStyle.selectedIndex].value;
+					var caseSign=document.getElementById("case-sign");
+					var regTel=/^1[345789]\d{9}$/;
+					var regName=/^[\u4e00-\u9fa5]{1,4}$/;
+					var agree=document.getElementById("check")
+					if(!agree.checked){
+						mui.toast("请先点击同意或查看协议")
+						return 
+					}
+					if(!regName.test(caseName.value)){
+						mui.toast("请先输入客户姓名")
+						return 
+					}
+					if(!regTel.test(caseTel.value)){
+						mui.toast("请输入正确的手机号码")
+						return false;
+					}
+					else{
+						this.disabled = true;
+						mui.ajax('add-case-url',{
+							data:{
+								Judgem: "sendCase",
+								Uid: Uid,
+								Tim: Tim,
+								name:caseName.value,
+								sex:sex,
+								telphone:caseTel.value,
+								city:city,
+								needMoney:needMoney.value,
+								work:work,
+								loanStyle:style,
+								sign:caseSign.value
+							},
+							beforeSend: function (request) {
+								request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+							},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							success:function(data){
+								this.disabled = true;
+								mui.toast("报单成功！")
+								mui.scrollTo( 0,100);
+								mui('#success-popover').popover("show")
+								var inputs= document.getElementsByTagName("input");
+								for( var i in inputs){
+									inputs[i].value="";
+								}
+								this.disabled = false;
+							},
+							error:function(xhr,type,errorThrown){
+								
+							}
+						})
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

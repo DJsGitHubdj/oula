@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="cache-control" content="no-cache">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<title>做单申请</title>
+		<style type="text/css">
+			.header{
+				text-align: center;
+				padding:38px 20px;
+				padding-bottom: 14px;
+				color: #FFFFFF;
+				background: url(img/2.png);
+				background-size: 80% 100%;
+			}
+			.title{font-size: 24px;margin-bottom: 10px;}
+			.header p{font-size: 12px; color: #9fbff9;}
+			.mui-content::after{content: "";height: 40px;}
+			input::-webkit-input-placeholder { font-size: 14px;}
+			.item-top{margin: 16px; background: #FFFFFF;padding: 14px 0;border-radius: 6px;}
+			.customers-item{
+				padding:6px 0;
+				background: #fff;
+			}
+			.customers-info{
+				border-top: 1px solid #d5d5d5;
+			}
+			.info-line{
+				display: block;
+				width: 6px;
+				height: 26px;
+				background: #3375e8;
+				float: left;
+				margin-right: 14px;
+			}
+			.item-top .mui-pull-right{margin-right: 20px; text-align: right;}
+			.money{font-size: 12px; color: #ef413b;}
+			.info-name,.customer-tel{font-size: 12px;}
+			.customer-name{font-size: 18px;font-weight: 600;padding: 4px 0;}
+			.customer-style{font-size: 18px;color: #E2554E;padding: 4px 0;}
+			.need-money,.sign-time{font-size: 12px;color: #9f9fa0;}
+			.customers-info{
+				padding: 10px 20px;
+				background: #FFFFFF;
+				border-top: 1px solid #d5d5d5;
+			}
+			.customers-info div{padding: 4px 0;}
+			.customers-info input{border: 0;margin: 0;padding: 0;}
+			.submit{padding:0 15px;}
+			.mui-btn-block{
+				margin-top: 14px;
+				padding: 10px;
+				background: #3375EB;
+			}
+			.mui-input-group{margin:15px;background:#FFFFFF;border-radius: 6px;}
+			.mui-input-group:before,.mui-input-group:after {height: 0;}
+			.mui-input-row:last-child:after{height: 0;}
+			.mui-input-group .mui-input-row{height: 60px;}
+			.mui-input-row label{padding:21px 15px;}
+			.mui-input-group label{font-size: 14px; color:#666;}
+			.mui-input-group input{
+				border: 0;
+				margin-bottom: 0;
+				padding-left: 0;
+				font-size: 14px;
+			}
+			input::-webkit-input-placeholder {color: #AAAAAA;font-size: 14px;}
+			.mui-input-group input,.mui-input-group select{height: 57px;font-size: 14px;}
+			.mui-select:before{top:18px;right: 14px;font-size: 20px;}
+			.conditions{
+				margin: 15px;
+				padding: 14px 15px;
+				border-radius: 8px;
+				background: #FFFFFF;
+			}
+			.mui-input-row .mui-input-clear~.mui-icon-clear{top:20px;}
+			
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="header">
+				<div class="title">提交做单</div>
+				<p>产品丰富&nbsp;快速审核&nbsp;高额返佣</p>
+			</div>
+			<div class="item-top mui-clearfix">
+				<div class="info-line"></div>
+				<div class="mui-pull-left">
+					<div class="info-name">客户名称</div>
+					<div class="customer-name" id="customer-name">张&nbsp;先生</div>
+					<div class="need-money" id="need-money">意向金额：1000000</div>
+				</div>
+				<div class="mui-pull-right">
+					<div class="customer-tel" id="customer-tel">130****4564</div>
+					<div class="customer-style" id="customer-style">储备</div>
+					<div class="sign-time" id="sign-time">2018-11-07 15:51</div>
+				</div>
+			</div>
+			<form class="mui-input-group">
+				<div class="mui-input-row mui-select">
+					<label for="">选择产品</label>
+					<select id="loan-style">
+						<option value="1" data-id="001">锦易贷100&nbsp;无抵押</option>
+						<option value="2" data-id="002">房易贷&nbsp;有抵押</option>
+						<option value="3" data-id="003">锦城消费金融贷&nbsp;无抵押</option>
+						<option value="4" data-id="004">押车贷&nbsp;无抵押</option>
+					</select>
+				</div>
+				<div class="mui-input-row">
+					<label>贷款金额</label>
+					<input type="number" class="mui-input-clear" id="needMoney" placeholder="单位:元">
+				</div>
+				<div class="mui-input-row mui-select">
+					<label>还款方式</label>
+					<select id="payment-method">
+						<option value="先息后本">先息后本</option>
+						<option value="等额本息">等额本息</option>
+						<option value="等额本金">等额本金</option>
+						<option value="其他">其他约定方式</option>
+					</select>
+				</div>
+				<div class="mui-input-row">
+					<label>预计收益</label>
+					<input type="text" id="pre-get" disabled="disabled" value="0.00元">
+				</div>
+            </div>
+			</form>
+			<div class="submit">
+				<button type="button" class="mui-btn-block mui-btn-blue" id="submit">提交做单</button>
+			</div>
+			<div class="conditions">
+				必要条件：
+			</div>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui.openWindow.js"></script>
+		<script src="js/public.js"></script>
+		<script>
+			mui.init();
+			mui.ready(function(){
+				var customerId="";
+				mui.getExtras(function(extras){
+					// console.log(extras);
+					customerId=extras.customerId;
+				});
+				// 封装id选择器
+				var get = function (id) {
+					return document.getElementById(id);
+				};
+				console.log(customerId)
+				// 请求该客户数据
+				// getData()
+				function getData(){
+					mui.ajax('action/User.ashx',{
+						data:{
+							Judgem: 'getCostomer',
+							Uid: Uid,
+							Tim: Tim,
+							customerId:customerId
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							if(data.result=="true"){
+								get("customer-name").innerText=data.name;
+								get("need-money").innerText=data.needmoney;
+								get("customer-tel").innerText=data.phone;
+								get("customer-style").innerText=data.style;
+								get("sign-time").innerText=data.sign.time;
+							}else{
+								mui.toast("验证请求错误")
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							mui.toast("连接服务器失败")
+// 							mui.openWindow({
+// 								url: '404.html',
+// 								id: '404'
+// 							})
+						}
+					});
+				}
+// 				var data=[
+// 					{
+// 						value:"锦城消费",
+// 						name:"锦城消费金融信用贷"
+// 					},
+// 					{
+// 						value:"建行易分期",
+// 						name:"建行易分期按揭贷"
+// 					},
+// 					{
+// 						value:"华夏幸福金",
+// 						name:"华夏消费金融信用贷"
+// 					},
+// 					{
+// 						value:"农行助业贷",
+// 						name:"华夏银行信用贷"
+// 					},
+// 				]
+				var  option_value="";
+				var  input_value="";
+				get("loan-style").addEventListener("change",function(){
+					var styles = get("loan-style");
+					option_value = styles.options[styles.selectedIndex].getAttribute("data-id");
+					console.log(option_value);
+					if(input_value!=""){
+						get("pre-get").value=option_value*get("needMoney").value;
+					}
+				})
+				get("needMoney").addEventListener("input",function(){
+					input_value=this.value;
+					if(option_value!=""){
+						get("pre-get").value=option_value*get("needMoney").value;
+					}
+				})
+				function getProducts(){
+					mui.ajax('productsUrl',{
+						data:{
+							Judgem: 'getCostomer',
+							Uid: Uid,
+							Tim: Tim,
+						},
+						beforeSend: function (request) {
+							request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							if(data.result=="true"){
+								var loans= get("loan-style");
+								for(var i in data){
+									var loan_items;
+									loan_items += "<option value='"+data[i].value+"'>"+data[i].name+"</option>"
+								}
+								loans.innerHTML=loan_items;
+							}else{
+								mui.toast("身份验证错误");
+								mui.openWindow({
+									url: '404.html',
+									id: '404'
+								})
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							mui.toast("网络连接错误");
+							mui.openWindow({
+								url: '404.html',
+								id: '404'
+							})
+						}
+					});
+				}
+				// 提交
+				document.getElementById("submit").addEventListener("tap",function(){
+					var loan_style=get("loan-style");
+					var style=loan_style.options[loan_style.selectedIndex].value;
+					var needMoney=get("needMoney").value;
+					var pay_method=get("payment-method");
+					var method=pay_method.options[pay_method.selectedIndex].value;
+					mui.ajax('action/User.ashx',{
+						data:{
+							Judgem: 'doCostomer',
+							Uid: Uid,
+							Tim: Tim,
+							customerId:customerId,
+							loanStyle:style,
+							needMoney:needMoney,
+							paystyle:method
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						success:function(data){
+							if(data.result=="true"){
+								mui.toast("提交做单成功")
+								mui.back();
+							}else{
+								mui.toast("提交失败")
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							mui.toast("提交失败")
+							mui.openWindow({
+								url: '404.html',
+								id: '404'
+							})
+						}
+					});
+				})
+				
+			})
+		</script>
+	</body>
+</html>

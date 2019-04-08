@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
+    <title>产品中心</title>
+    <style type="text/css">
+		#pullrefresh{
+			/* transition: all 0.5s ; */
+		}
+		
+        .day-tip {
+            padding: 12px 15px;
+			padding-bottom: 10px;
+            background: #234eb3;
+        }
+        #grade-gift::after {
+            content: "丨";
+            font-size: 14px;
+            color: #C0C0C0;
+            vertical-align: baseline;
+        }
+
+        .day-tip p {
+            color: #ffffff;
+        }
+
+        .day-tip .mui-btn-blue {
+            color: #FFFFFF;
+            font-size: 12px;
+            padding: 2px 6px;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            background: none;
+        }
+
+        .border-line {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            background-image: -webkit-linear-gradient(left,#698cd2 20%,#fff 40%,#698cd2);
+        }
+        /* .border-line:after{
+                content: "";
+                display: block;
+                position: absolute;
+                z-index: 10;
+                bottom: -6px;
+                left: 40px;
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 8px solid #234eb3;
+                color: #234eb3;
+            } */
+        .my-info {
+            display: block;
+            position: relative;
+            background: #4376e4;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+            .my-info div {
+                color: #FFFFFF;
+                padding: 6px 0;
+            }
+
+        #month-pay {
+            font-size: 50px;
+            margin: 6px 0 16px 0;
+        }
+
+        .yesterday {
+            color: #98b6ef;
+        }
+
+        #yesterday {
+            color: #FFFFFF;
+            margin-left: 6px;
+        }
+
+        .my-info .mui-icon-arrowright {
+            position: absolute;
+            top: 42%;
+            right: 15px;
+            color: #F5F5F5;
+            font-size: 20px;
+        }
+        /* 定位 */
+        .mui-segmented-control {
+            overflow: auto;
+        }
+
+        .mui-control-item.mui-active::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 15%;
+            height: 2px;
+            background: #3778f6;
+            bottom: -4px;
+            /* left:10%; */
+        }
+
+        #segmentedControl .iconfont {
+            font-size: 20px;
+        }
+
+        .mui-segmented-control .mui-control-item {
+            line-height: normal;
+            padding-bottom: 16px;
+            padding: 0 15px;
+        }
+
+        .mui-segmented-control {
+            padding: 10px 15px;
+            padding-bottom: 0;
+            background: #4e82ef;
+        }
+
+        .mui-control-item span, .mui-control-item p {
+            color: #FFFFFF;
+        }
+
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            color: #FFFFFF;
+            border-bottom: 0;
+        }
+
+        .product-item {
+            display: block;
+        }
+
+        .mui-control-content {
+            position: relative;
+        }
+
+            .mui-control-content:after {
+                content:;
+                font-family: Muiicons;
+                position: absolute;
+                bottom: -20px;
+                right: 50%;
+                left: 50%;
+                content: '\e581';
+                color: rgba(170,170,170,.6);
+            }
+
+        .my-title {
+            font-size: 14px;
+        }
+		/*12-13*/
+        .product-cont {
+            color: #333333;
+            font-size: 14px;
+            font-weight: 600;
+			color: #e2554e;
+        }
+        .product-rate {
+            color: #e2554e;
+            font-size: 14px;
+        }
+        .mui-card-header {
+            font-size: 12px;
+        }
+        .mui-card-footer p {
+            color: #666666;
+        }
+        .product-advantage {
+            font-size: 12px;
+        }
+		.product-number{color: #E2554E;margin-left:2px;}
+		/* 弹出层 */
+		.mui-popover {
+			width: 80%;
+			position: absolute;
+			left:10%;
+			right: 10%;
+			top: 14%;
+			border-radius: 6px;
+		}
+		.popover-header{
+			color: #FFFFFF;
+			padding: 12px 14%;
+			text-align: center;
+			background: #4376e4;
+			border-top-right-radius:6px;
+			border-top-left-radius:6px;
+		}
+		.popover-title{
+			font-size: 24px;
+			padding: 10px;
+		}
+		.sub-title{font-size: 12px;}
+		.popover-content{padding: 14px 0;}
+		.popover-item{padding: 12px 0;margin-left: 15%;}
+		.popover-item p{font-size: 12px;margin: 0;}
+		.item-left{
+			width: 40px;
+			height: 40px;
+			margin-right: 10px;
+			text-align: center;
+			border-radius: 20px;
+			background: #ecf1fc;
+		}
+		.item-left .iconfont{
+			display: block;
+			margin-top: 25%;
+			font-size: 20px;
+			color: #4376e4;
+		}
+		.item-title{font-size: 14px;font-weight: 600;}
+		.popover-bottom{padding: 24px;padding-top: 0;}
+		.popover-bottom .mui-btn-block{padding: 8px 0;border: 0;}
+		#close{position: absolute;top: 2px;left: 2px;color: #ecf1fc;font-size: 36px;}
+		/* 新增 */
+		.product-item{display: flex;align-items: center;-webkit-align-items: center;}
+		.bank-img{width: 16%;}
+		.bank-img img{display: block; max-width: 80%;}
+		.bank-content{width: 84%;}
+		.product-name{font-weight: 700;color: #000;}
+    </style>
+</head>
+<body>
+    <div class="mui-content">
+        <div class="day-info">
+            <div class="day-tip mui-clearfix">
+                <p id="grade-gift" class="mui-pull-left">11月等级礼遇</p>
+                <p id="gift-name" class="mui-pull-left">王品牛排礼券</p>
+                <p class="mui-pull-right"><a class="mui-btn-blue">去领取</a></p>
+            </div>
+            <div class="border-line"></div>
+            <a id="toMyAsset" class="my-info mui-clearfix">
+                <div class="">
+                    <div class="my-title">我的11月工资(元)</div>
+                    <div id="month-pay">0.00</div>
+                    <p class="yesterday">昨日 <span id="yesterday">+0.00</span></p>
+                </div>
+                <span class="mui-icon mui-icon-arrowright"></span>
+            </a>
+        </div>
+        <div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted">
+						<a class="mui-control-item mui-active" href="#credit-loan" data-type="180">
+							<span class=" iconfont icon-xinyong">
+							</span>
+							<p>信贷</p>
+						</a>
+            <a class="mui-control-item" href="#house-loan" data-type="178">
+                <span class="iconfont icon-kehu"></span>
+                <p>房贷</p>
+            </a>
+            <a class="mui-control-item" href="#car-loan" data-type="179">
+                <span class="iconfont icon-che"></span>
+                <p>车贷</p>
+            </a>
+            <a class="mui-control-item" href="#other-loan" data-type="181">
+                <span class="iconfont icon-qita"></span>
+                <p>其它</p>
+            </a>
+        </div>
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="top:286px;">
+            <div class="mui-scroll">
+                <div class="product-list" id='product_lists'>
+					<a href='' class='product-item mui-card' data-id=''>
+						<div class="bank-img">
+							<img src="img/bank_zx.png" alt="zx">
+						</div>
+						<div class="bank-content">
+							<div class='mui-card-header mui-clearfix'>
+								<div class='product-name mui-pull-left'>
+									中信银行二抵
+								</div>
+								<div class='mui-pull-right'>
+									返佣 <span class="product-number">+500</span>
+								</div>
+							</div>
+							<div class='mui-card-content mui-clearfix'>
+								<div class='product-rate mui-pull-left'>
+									利率 0.5%
+								</div>
+								<div class='product-cont mui-pull-right'>
+									30-200万
+								</div>
+							</div>
+							<div class='mui-card-footer mui-clearfix'>
+								<p class='product-advantage mui-pull-left'>可做6-36期</p>
+								<p class='product-advantage2 mui-pull-right'>速度快 利率低</p>
+							</div>
+						</div>
+					</a>
+					<a href='' class='product-item mui-card' data-id=''>
+						<div class="bank-img">
+							<img src="img/bank_gd.png" alt="gf">
+						</div>
+						<div class="bank-content">
+							<div class='mui-card-header mui-clearfix'>
+								<div class='product-name mui-pull-left'>
+									广发银行
+								</div>
+								<div class='mui-pull-right'>
+									已做单<span class='get-count'>0</span>笔
+								</div>
+							</div>
+							<div class='mui-card-content mui-clearfix'>
+								<div class='product-rate mui-pull-left'>
+									利率 +0.5%
+								</div>
+								<div class='product-cont mui-pull-right'>
+									10-50万
+								</div>
+							</div>
+							<div class='mui-card-footer mui-clearfix'>
+								<p class='product-advantage mui-pull-left'>做单可得总金额</p>
+								<p class='product-advantage2 mui-pull-right'>速度快 利率低</p>
+							</div>
+						</div>
+					</a>
+					<a href='' class='product-item mui-card' data-id=''>
+						<div class="bank-img">
+							<img src="img/bank_jt.png" alt="jt">
+						</div>
+						<div class="bank-content">
+							<div class='mui-card-header mui-clearfix'>
+								<div class='product-name mui-pull-left'>
+									交通银行
+								</div>
+								<div class='mui-pull-right'>
+									已做单<span class='get-count'>0</span>笔
+								</div>
+							</div>
+							<div class='mui-card-content mui-clearfix'>
+								<div class='product-rate mui-pull-left'>
+									利率 +0.5%
+								</div>
+								<div class='product-cont mui-pull-right'>
+									交通银行工薪贷
+								</div>
+							</div>
+							<div class='mui-card-footer mui-clearfix'>
+								<p class='product-advantage mui-pull-left'>做单可得总金额</p>
+								<p class='product-advantage2 mui-pull-right'>放款快 利率低</p>
+							</div>
+						</div>
+					</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- 弹出层 -->
+	<div class="mui-popover" id="popover">
+		<div class="popover-header">
+			<div class="popover-title">好产品 不错过</div>
+			<div class="sub-title">选择符合要求的客户做单，精准匹配产品赚收益</div>
+		</div>
+		<div class="popover-content">
+			<div class="popover-item mui-clearfix">
+				<div class="item-left mui-pull-left"><span class="iconfont icon-gongzuo1"></span></div>
+				<div class="item-right mui-pull-left">
+					<div class="item-title">成为会员</div>
+					<p>动动手指 做单 找客户</p>
+				</div>
+			</div>
+			<div class="popover-item mui-clearfix">
+				<div class="item-left mui-pull-left"><span class="iconfont icon-chongzhi"></span></div>
+				<div class="item-right mui-pull-left">
+					<div class="item-title">赚收益</div>
+					<p>均单享受高收益 分享也能赚收益</p>
+				</div>
+			</div>
+			<div class="popover-item mui-clearfix">
+				<div class="item-left mui-pull-left"><span class="iconfont icon-yinhangqia"></span></div>
+				<div class="item-right mui-pull-left">
+					<div class="item-title">灵活取</div>
+					<p>提交提现后最快当日内到账</p>
+				</div>
+			</div>
+		</div>
+		<div class="popover-bottom"><button type="button" id="go" class="mui-btn-block mui-btn-blue">立即去选产品</button></div>
+		<span id="close" class="mui-icon mui-icon-closeempty"></span>
+	</div>
+    <footer class="mui-bar mui-bar-tab">
+        <a href="product-list.html" class="mui-tab-item mui-active">
+            <span class="mui-icon iconfont icon-shouye1"></span>
+            <span class="mui-tab-label">今日</span>
+        </a>
+        <a class="mui-tab-item" href="grab-case.html">
+            <span class="mui-icon iconfont icon-qiang"></span>
+            <span class="mui-tab-label">抢单</span>
+        </a>
+        <a class="mui-tab-item" href="work-table.html">
+            <span class="mui-icon iconfont icon-gongzuotai" style="font-size: 26px;"></span>
+            <span class="mui-tab-label">工作台</span>
+        </a>
+        <a class="mui-tab-item" href="my.html">
+            <span class="mui-icon iconfont icon-wo"></span>
+            <span class="mui-tab-label">我的</span>
+        </a>
+    </footer>
+    <script src="js/mui.min.js"></script>
+    <script type="text/javascript" src="js/mui.openWindow.js"></script>
+    <script src="js/public.js"></script>
+    <script>
+		
+        mui.init({
+            pullRefresh: {
+                container: '#pullrefresh',
+                up: {
+                    contentrefresh: '正在为您加载更多...',
+                    contentnomore: '没有更多啦',
+                    callback: pullupRefresh
+                },
+            }
+        });
+		// mui('.mui-scroll-wrapper').scroll();
+		console.log(parseFloat(-34.56)+"px")
+		// 监听滚动事件 上拉下拉
+		var srollDiv=document.getElementById('pullrefresh');
+		srollDiv.addEventListener('scroll', function (e ) {
+			  console.log(e.detail.lastY);
+			  var lastY=e.detail.lastY;
+			  
+			  if(lastY<-50){
+				  console.log("向上拉动50px")
+				  document.getElementsByClassName("day-info")[0].style.display="none";
+				// 获取元素高度属性
+				srollDiv.style.top= "64px" ;
+			  }else if(lastY>50){
+				  document.getElementsByClassName("day-info")[0].style.display="block";
+				  srollDiv.style.top="286px";
+			  }
+		})
+		document.getElementById("toMyAsset").addEventListener("tap",function(){
+			location.href="my-asset.html";
+		})
+		mui.ready(function(){
+			// 默认打开弹出层
+			// mui(".mui-popover").popover("show");
+			document.getElementById("close").addEventListener("tap",function(){
+				mui(".mui-popover").popover("hide");
+			})
+			document.getElementById("go").addEventListener("tap",function(){
+				mui(".mui-popover").popover("hide");
+			})
+		})
+        var loanType = "178";//首次默认加载房贷
+        // 下拉加载函数
+        var isOver = false;
+        var pageIndex = 1;
+        var pageSize = 5;
+        // getData();//首次加载
+        //点击切换类型
+        mui('#segmentedControl').on('tap', 'a', function () {
+            loanType = this.getAttribute("data-type");
+            document.getElementById("product_lists").innerHTML = "";//切换时先清空当前类型
+            isOver = false;
+            pageIndex = 1;
+            getData();
+        })
+        function pullupRefresh() {
+            setTimeout(function () {
+                mui('#pullrefresh').pullRefresh().endPullupToRefresh((isOver)); //参数为true代表没有更多数据了。
+                if (isOver == false) {
+                    pageIndex++;
+                    // getData();
+                }
+				
+            }, 500);
+        }
+        // 封装ajax取数据
+        function getData() {
+            mui.ajax('action/Product.ashx', {
+                data: {
+                    Judgem: "getProductList",
+                    Uid: Uid,
+                    Tim: Tim,
+                    type: loanType,
+                    pageIndex: pageIndex,
+					pageSize:pageSize
+                },
+
+                beforeSend: function (request) {
+                    request.setRequestHeader("x-ol-authtoken-ssl", SafeCode);
+                },
+                dataType: 'text',//服务器返回json格式数据
+                type: 'post',//HTTP请求类型
+                timeout: 30000,//超时时间设置为10秒；
+                success: function (data) {
+					if(data!=""){
+						var jsonData = JSON.parse(data);
+						if (jsonData.result == "true") {
+							var item = "";
+							var products = jsonData.products;
+							if (products.length < pageSize) {
+								isOver = true;
+							}
+							var v_div = document.createElement("div");
+                            for (var i = 0; i < products.length; i++) {
+                                var profitStr = "";
+                                var profit_type = products[i].profit_type;
+                                if (profit_type == "0") {
+                                    profitStr = "+" + products[i].profit + "<span style='font-size:20px;margin-left:4px;'>元</span>";
+                                } else {
+                                    profitStr = "+" + products[i].profit + "<span style='font-size:20px;margin-left:4px;'>%</span>";
+                                }
+                                item += "<a href='' class='product-item mui-card' data-id='" + products[i].id + "'><div class='mui-card-header mui-clearfix'><div class='product-name mui-pull-left'>" + products[i].abbreviation + "</div><div class='mui-pull-right'>已做单<span class='get-count'>0</span>笔</div></div><div class='mui-card-content mui-clearfix'><div class='product-rate mui-pull-left'>" + profitStr + "</div><div class='product-cont mui-pull-right'>" + products[i].title + "</div></div><div class='mui-card-footer mui-clearfix'><p class='product-advantage mui-pull-left'>做单可得总金额</p><p class='product-advantage2 mui-pull-right'>" + products[i].keyword + "</p></div></a>";
+                            }
+							v_div.innerHTML = item;
+							document.getElementById("product_lists").appendChild(v_div);
+						} else {
+							mui.toast("验证错误")
+							mui.openWindow({
+								url: '404.html',
+								id: '404'
+							})
+						}
+					}
+                },
+                error: function (xhr, type, errorThrown) {
+                    mui.toast("网络连接错误，请稍后再试。")
+                    mui.openWindow({
+                        url: '404.html',
+                        id: '404'
+                    })
+                }
+            });
+        }
+        // 产品列表点击事件,带参数跳转
+        mui('.product-list').on('tap', 'a', function () {
+            mui.openWindow({
+                url: './product-details.html',
+                id: 'product-details',
+                show: {
+                    autoShow: true,//页面loaded事件发生后自动显示，默认为true
+                    aniShow: "slide-in-right",//页面显示动画，默认为”slide-in-right“；
+                    duration: "100"//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+                },
+                extras: {
+                    token: SafeCode,
+                    oid: Uid,
+                    tim: Tim,
+                    productId: this.getAttribute('data-id')
+                }
+            })
+        });
+    </script>
+</body>
+</html>
